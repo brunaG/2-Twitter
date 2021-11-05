@@ -1,4 +1,4 @@
-#include "server_notification.hpp"
+#include "notificacao_servidor.hpp"
 
 NotificationManager::NotificationManager(){
     InicializaEDnotification();
@@ -203,7 +203,7 @@ int NotificationManager::EnviaTweet(packet* tweet, string perfil){
 }
 
 void NotificationManager::RemoveNotFila(int indice_not, int indice_notfila){
-    // Quando uma notificação é enviada para o Client
+    // Quando uma notificação é enviada para o Cliente
     // Remove a notificação da fila de notificações pendentes.
     // Decrementa os envios faltantes do tweet em questão.
 
@@ -368,7 +368,7 @@ int NotificationManager::IncluiNaFilaNotPendentes(int indice_not, int id_tweet){
 }
 
 int NotificationManager::AdicionaTweet(struct pkt* tweet){
-    // Para quando é recebido um tweet de um perfil do Client.
+    // Para quando é recebido um tweet de um perfil do Cliente.
     // Adiciona o tweet do seu respectivo perfil na estrutura de notificações.
     // Chama a atualização da fila de notificações.
 

@@ -1,7 +1,7 @@
-#include "Client/client_tcp.hpp"
-#include "Client/client_interface.hpp"
-#include "Client/frontend_tcp.hpp"
-#include "Utils/notification.hpp"
+#include "Cliente/tcp_cliente.hpp"
+#include "Cliente/interface_cliente.hpp"
+#include "Cliente/frontend_tcp.hpp"
+#include "utilitarios/notificacao.hpp"
 using namespace std;
 
 void *CallInterface(void *arg){

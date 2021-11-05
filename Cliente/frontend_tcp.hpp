@@ -14,8 +14,8 @@
 #include <arpa/inet.h>    //close
 #include <sys/types.h>
 #include <ctime> //FD_SET, FD_ISSET, FD_ZERO macros
-#include "../Utils/notification.hpp"
-#include "../Utils/packet.hpp"
+#include "../utilitarios/notificacao.hpp"
+#include "../utilitarios/pacote.hpp"
 using namespace std;
 
 class FrontendConnectionManagement{

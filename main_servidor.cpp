@@ -1,10 +1,10 @@
-#include "Server/server_tcp.hpp"
+#include "Servidor/tcp_servidor.hpp"
 
 using namespace std;
 
-void *maintainConnection(void *arg){
-    ServerConnectionManagement obj = * (ServerConnectionManagement *) arg;
-    
+void *maintainConnection(void *arg) {
+    ServerConnectionManagement obj = *(ServerConnectionManagement *) arg;
+
     if (obj.getType() == "primario")
         obj.establishConnection();
     else
@@ -12,12 +12,13 @@ void *maintainConnection(void *arg){
     pthread_exit(NULL);
 }
 
-int main(int argc, char** argv){
+int main(int argc, char **argv) {
     int status;
     pthread_t clientsThread;
 
-    if (argc != 4){
-        cout << "Missing arguments! To run use: './server <ID> <IP address> <server type: primario or replica>'" << endl;  
+    if (argc != 4) {
+        cout << "Missing arguments! To run use: './server <ID> <IP address> <server type: primario or replica>'"
+             << endl;
         exit(-1);
     }
 
@@ -29,7 +30,7 @@ int main(int argc, char** argv){
     if (status != 0)
         exit(1);
 
-    status = pthread_join (clientsThread, NULL);
+    status = pthread_join(clientsThread, NULL);
     if (status != 0)
         exit(1);
 

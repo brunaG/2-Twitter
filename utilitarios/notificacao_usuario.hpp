@@ -1,6 +1,6 @@
 #ifndef NOTIFICATION_USER_H
 #define NOTIFICATION_USER_H
-#include "pending_users.hpp"
+#include "usuario_pendente.hpp"
 using namespace std;
 
 typedef struct{

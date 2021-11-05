@@ -18,12 +18,12 @@
 #include <vector>
 #include <signal.h>
 #include <unistd.h>
-#include "users.hpp"
-#include "../Utils/packet.hpp"
-#include "../Utils/utils.hpp"
-#include "../Utils/packet_replica.hpp"
+#include "usuario.hpp"
+#include "../utilitarios/pacote.hpp"
+#include "../utilitarios/utilitarios.hpp"
+#include "../utilitarios/pacote_replica.hpp"
 #include "replica.hpp"
-#define FILE_CONFIG_PATH "./Utils/file_config.txt"
+#define FILE_CONFIG_PATH "./utilitarios/file_config.txt"
 #define TIMEOUT 0.5
 using namespace std;
 

@@ -9,8 +9,8 @@
 #include <string.h>
 #include <pthread.h>
 #include <semaphore.h>
-#include "../Utils/notification.hpp"
-#include "../Utils/packet.hpp"
+#include "../utilitarios/notificacao.hpp"
+#include "../utilitarios/pacote.hpp"
 using namespace std;
 
 

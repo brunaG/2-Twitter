@@ -1,5 +1,5 @@
 #include <ctime>
-#include "server_tcp.hpp"
+#include "tcp_servidor.hpp"
 
 typedef struct thread_args{
     int socket_;
@@ -84,7 +84,7 @@ int ServerConnectionManagement::establishConnection(){
 
     cout << "My IP addrs: " << ip << endl;
     cout << "My ID: " << ID_server << endl;
-    cout << "Server type: " << type_server << endl;
+    cout << "Servidor type: " << type_server << endl;
 
     for (int i=0; i< (int) replicas.size(); i++){
         cout << "Replica: " << replicas[i].getAddress() << endl;
@@ -604,7 +604,7 @@ int ServerConnectionManagement::runAsReplica(){
     p_index = connectToGroup();
     if (p_index >= 0){
         primary = replicas[p_index];
-        printf("Server id %d is the leader\n", primary.getID());
+        printf("Servidor id %d is the leader\n", primary.getID());
         lider = primary.getID();
     }
     else{

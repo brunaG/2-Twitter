@@ -5,7 +5,7 @@
 #include <string.h>
 #include <iostream>
 #include <string.h>
-#include "../Utils/notification.hpp"
+#include "../utilitarios/notificacao.hpp"
 #define TYPE_USER 0
 #define TYPE_COMMAND 1
 using namespace std;

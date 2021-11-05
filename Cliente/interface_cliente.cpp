@@ -1,5 +1,5 @@
 #include <pthread.h>
-#include "client_interface.hpp"
+#include "interface_cliente.hpp"
 
 ClientInterface::ClientInterface(Notifications &obj):notification{obj}{
     seqn = 0;

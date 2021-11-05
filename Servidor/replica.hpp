@@ -16,8 +16,8 @@
 #include <ctime> //FD_SET, FD_ISSET, FD_ZERO macros
 #include <fstream>
 #include <vector>
-#include "users.hpp"
-#include "../Utils/packet.hpp"
+#include "usuario.hpp"
+#include "../utilitarios/pacote.hpp"
 using namespace std;
 
 class Replica{

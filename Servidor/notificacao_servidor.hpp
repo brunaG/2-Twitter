@@ -12,8 +12,8 @@
 #include <iomanip>
 #include <string.h>
 #include <iostream>
-#include "../Utils/packet.hpp"
-#include "../Utils/pkt_.hpp"
+#include "../utilitarios/pacote.hpp"
+#include "../utilitarios/pkt_.hpp"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -27,7 +27,7 @@ using namespace std;
 
 class NotificationManager{
 
-    // Estrutura de um tweet: é o que recebe do Client
+    // Estrutura de um tweet: é o que recebe do Cliente
 
     // Estrutura que fica na fila de notificações pendentes.
     // Precisa identificar apenas o id do tweet e o perfil a ser enviado.

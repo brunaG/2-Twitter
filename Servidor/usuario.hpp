@@ -9,10 +9,10 @@
 #include <fstream>
 #include <vector>
 #include <map>
-#include "../Utils/profile.hpp"
-#include "../Utils/packet.hpp"
-#include "../Utils/pkt_.hpp"
-#include "server_notification.hpp"
+#include "../utilitarios/perfil.hpp"
+#include "../utilitarios/pacote.hpp"
+#include "../utilitarios/pkt_.hpp"
+#include "notificacao_servidor.hpp"
 using namespace std;
 
 class Users{

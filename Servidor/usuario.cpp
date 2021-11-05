@@ -1,5 +1,5 @@
-#include "users.hpp"
-#include "../Utils/pending_users.hpp"
+#include "usuario.hpp"
+#include "../utilitarios/usuario_pendente.hpp"
 
 NotificationManager manager;
 

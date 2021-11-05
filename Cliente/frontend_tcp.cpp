@@ -108,7 +108,7 @@ int FrontendConnectionManagement::ConnectToServer(){
     packet message;
     pthread_t th;
 
-    printf("Connecting to Server\n");
+    printf("Connecting to Servidor\n");
 
     if ((server_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
