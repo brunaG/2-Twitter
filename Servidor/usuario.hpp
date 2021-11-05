@@ -26,7 +26,7 @@ class Usuario{
 
     public:
     Usuario();
-    void convertePacote(packet message,string user_message, pkt* converted, string sender);
+    void convertePacote(packet message,string user_message, EDPacote* converted, string sender);
     void novaMensagemCliente(packet message, int socket);
     void UsuarioSaiu(string user_name, int session);
     int ColetaMensagem(int socket, packet* pkt_tweet);

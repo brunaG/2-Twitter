@@ -27,11 +27,11 @@ class GerenciaConexaoFrontend{
     pthread_t th_read_client;
     pthread_t th_read_server;
     sem_t mutex_socket;
-    Notifications &notification;
+    Notificacoes &notification;
 
 
     public:
-    GerenciaConexaoFrontend(Notifications &obj);
+    GerenciaConexaoFrontend(Notificacoes &obj);
     static void* LeCliente(void *arg);
     static void* LeServidor(void *arg);
     int LeMensagem(packet pkt, int socket);

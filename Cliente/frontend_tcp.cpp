@@ -7,7 +7,7 @@ typedef struct thread_args{
 } Thread_args;
 
 
-GerenciaConexaoFrontend::GerenciaConexaoFrontend(Notifications &obj):notification{obj}{
+GerenciaConexaoFrontend::GerenciaConexaoFrontend(Notificacoes &obj):notification{obj}{
     PORT = 8080;
     strcpy(addr, "127.0.0.");
 
@@ -148,7 +148,7 @@ int GerenciaConexaoFrontend::ConectaServidor(){
 }
 
 int GerenciaConexaoFrontend::ColetaEnviaMensagem(packet *message){
-    notification.GetNotificationToSend(message);
+    notification.ColetaNotificacoesEnviar(message);
     return send(server_socket , message, sizeof(*message), 0);
 }
 

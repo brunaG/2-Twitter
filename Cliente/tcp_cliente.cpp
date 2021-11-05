@@ -1,6 +1,6 @@
 #include "tcp_cliente.hpp"
 
-GerenciaConexaoCliente::GerenciaConexaoCliente(Notifications &obj):notification{obj}{
+GerenciaConexaoCliente::GerenciaConexaoCliente(Notificacoes &obj):notification{obj}{
     //TO DO: We can modify the constructor to receive the port
     PORT = 8080;
     sock = 0;
@@ -49,7 +49,7 @@ int GerenciaConexaoCliente::EstabeleceConexao()
 }
 
 int GerenciaConexaoCliente::ColetaEnviaMensagem(packet *message){
-    notification.GetNotificationToSend(message);
+    notification.ColetaNotificacoesEnviar(message);
     return send(sock , message, sizeof(*message), 0);
 }
 

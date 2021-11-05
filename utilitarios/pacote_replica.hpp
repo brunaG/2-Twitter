@@ -10,6 +10,6 @@ typedef struct{
     uint16_t timestamp;
     uint16_t socket;
     char payload[256];
-} packet_replica;
+} EDPacoteReplica;
 
 #endif

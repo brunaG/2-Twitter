@@ -1,7 +1,7 @@
 #include <pthread.h>
 #include "interface_cliente.hpp"
 
-InterfaceCliente::InterfaceCliente(Notifications &obj):notification{obj}{
+InterfaceCliente::InterfaceCliente(Notificacoes &obj):notification{obj}{
     seqn = 0;
 }
 
@@ -50,7 +50,7 @@ void InterfaceCliente::SalvaNomePerfil(){
     char user_converted[ColetaPerfil().size()+1];
     strcpy(user_converted, ColetaPerfil().c_str());
 
-    notification.UpdateBufferToSend(0, seqn, ColetaPerfil().length(), time(0), user_converted);
+    notification.AtualizaBufferEnviar(0, seqn, ColetaPerfil().length(), time(0), user_converted);
     seqn++;
 }
 
@@ -68,7 +68,7 @@ string InterfaceCliente::LeComandos(){
 void InterfaceCliente::ProcessaComandos(string command, int type){
     char convertedCommand[command.length() + 1];
     strcpy(convertedCommand, command.c_str());
-    notification.UpdateBufferToSend(type, seqn, command.length(), time(0), convertedCommand);
+    notification.AtualizaBufferEnviar(type, seqn, command.length(), time(0), convertedCommand);
     seqn++;
 
 }
@@ -84,7 +84,7 @@ string InterfaceCliente::ColetaPerfil(){
 void* InterfaceCliente::ColetaNovaNotificacao(void *ptr){
     packet new_notification;
     while (true){
-        ((InterfaceCliente*) ptr) -> notification.GetNotificationToReceive(&new_notification);
+        ((InterfaceCliente*) ptr) -> notification.ColetaNotificacoesReceber(&new_notification);
         cout << "**********************************" << endl;
         cout << "***You have a new notification!***" << endl;
         cout << "**********************************" << endl;

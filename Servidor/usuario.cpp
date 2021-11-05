@@ -62,7 +62,7 @@ void Usuario::novaMensagemCliente(packet message, int socket){
             sem_wait(&buffer_notification_empty);
             sem_wait(&mutex_p);
 
-            pkt tweetToSend;
+            EDPacote tweetToSend;
             user_message = normal_message.substr(5, command_length);
             user_name = usernamesMap[socket];
             convertePacote(message, user_message, &tweetToSend, user_name);
@@ -75,7 +75,7 @@ void Usuario::novaMensagemCliente(packet message, int socket){
 
 }
 
-void Usuario::convertePacote(packet message, string user_message, pkt* converted, string sender){
+void Usuario::convertePacote(packet message, string user_message, EDPacote* converted, string sender){
     converted->type = message.type;
     converted->length = message.length;
     converted->timestamp = message.timestamp;

@@ -13,7 +13,7 @@ using namespace std;
 class InterfaceCliente{
     private:
     string profile;
-    Notifications &notification;
+    Notificacoes &notification;
     int seqn;
 
     void DefinePerfil(string user_profile);
@@ -22,7 +22,7 @@ class InterfaceCliente{
     string LeComandos();
 
     public:
-    InterfaceCliente(Notifications &obj);
+    InterfaceCliente(Notificacoes &obj);
     bool perfilInvalido(string user_profile);
     void CriaInterface();
     string ColetaPerfil();

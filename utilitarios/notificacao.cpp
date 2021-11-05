@@ -1,6 +1,6 @@
 #include "notificacao.hpp"
 
-Notifications::Notifications(){
+Notificacoes::Notificacoes(){
     buffer_size = 256;
 
     sem_init(&buffer_to_send_empty, 0, buffer_size);
@@ -22,7 +22,7 @@ Notifications::Notifications(){
 
 }
 
-void Notifications::UpdateBufferToSend(uint16_t type, uint16_t seqn, uint16_t length, int16_t timestamp, char* payload){
+void Notificacoes::AtualizaBufferEnviar(uint16_t type, uint16_t seqn, uint16_t length, int16_t timestamp, char* payload){
     packet message;
 
     sem_wait(&buffer_to_send_empty);
@@ -43,7 +43,7 @@ void Notifications::UpdateBufferToSend(uint16_t type, uint16_t seqn, uint16_t le
 
 }
 
-void Notifications::UpdateBufferToReceive(uint16_t type, uint16_t seqn, uint16_t length, int16_t timestamp, char* payload){
+void Notificacoes::UpdateBufferToReceive(uint16_t type, uint16_t seqn, uint16_t length, int16_t timestamp, char* payload){
     packet message;
 
     sem_wait(&buffer_to_receive_empty);
@@ -63,7 +63,7 @@ void Notifications::UpdateBufferToReceive(uint16_t type, uint16_t seqn, uint16_t
     sem_post(&buffer_to_receive_full);
 }
 
-void Notifications::GetNotificationToSend(packet* message){
+void Notificacoes::ColetaNotificacoesEnviar(packet* message){
 
     sem_wait(&buffer_to_send_full);
     sem_wait(&mutex_c_send);
@@ -82,7 +82,7 @@ void Notifications::GetNotificationToSend(packet* message){
     sem_post(&buffer_to_send_empty);
 }
 
-void Notifications::GetNotificationToReceive(packet* message){
+void Notificacoes::ColetaNotificacoesReceber(packet* message){
 
     sem_wait(&buffer_to_receive_full);
     sem_wait(&mutex_c_receive);

@@ -17,11 +17,11 @@ using namespace std;
 class GerenciaConexaoCliente{
     char connection_address[11];    //address to connect
     int PORT;
-    Notifications &notification;
+    Notificacoes &notification;
     int sock;
 
     public:
-    GerenciaConexaoCliente(Notifications &obj);
+    GerenciaConexaoCliente(Notificacoes &obj);
     int EstabeleceConexao();
     void defineEnderecoConexao(char adress[11]);
     private:

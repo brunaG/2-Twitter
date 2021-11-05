@@ -10,6 +10,6 @@ typedef struct{
     int timestamp;
     int length_message;
     string message;
-} pending_users;
+} EDUsuarioPendente;
 
 #endif

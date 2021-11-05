@@ -348,7 +348,7 @@ void* ServerConnectionManagement::ConfirmTransaction(void *arg){
             continue;
         
         //building packet to replica
-        packet_replica pkt_rep;
+        EDPacoteReplica pkt_rep;
         pkt_rep.seqn = pkt.seqn;
         pkt_rep.type = pkt.type;
         pkt_rep.timestamp = pkt.timestamp;
@@ -621,7 +621,7 @@ int ServerConnectionManagement::runAsReplica(){
         //does something
         //read the primary server
         packet pkt;
-        packet_replica pkt_rep;
+        EDPacoteReplica pkt_rep;
         int primary_socket = -1;
         int status;
 

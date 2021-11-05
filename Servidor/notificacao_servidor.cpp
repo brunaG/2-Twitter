@@ -303,14 +303,14 @@ int GerenciaNotificacao::ProcuraSeguidor(string caminho, string perfil_procurado
 
 }
 
-void GerenciaNotificacao::DefineTamanhoPacote(struct pkt* tweet){
+void GerenciaNotificacao::DefineTamanhoPacote(struct EDPacote* tweet){
     // Seta o tamanho da mensagem do tweet.
     // Não utilizada: este valor já vem do client.
 
     tweet->length = tweet->payload.size();
 }
 
-void GerenciaNotificacao::SetEnviosFaltantes(struct pkt* tweet, struct notification* notif){
+void GerenciaNotificacao::SetEnviosFaltantes(struct EDPacote* tweet, struct notification* notif){
     // Seta a quantidade total de envios que um tweet terá:
     //           quantidade é o número de seguidores deste perfil;
 
@@ -367,7 +367,7 @@ int GerenciaNotificacao::AdicionaFilaPendentes(int indice_not, int id_tweet){
 
 }
 
-int GerenciaNotificacao::AdicionaTweet(struct pkt* tweet){
+int GerenciaNotificacao::AdicionaTweet(struct EDPacote* tweet){
     // Para quando é recebido um tweet de um perfil do Cliente.
     // Adiciona o tweet do seu respectivo perfil na estrutura de notificações.
     // Chama a atualização da fila de notificações.

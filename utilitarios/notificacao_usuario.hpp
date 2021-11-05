@@ -6,7 +6,7 @@ using namespace std;
 typedef struct{
     string profile;
     vector<string> tweet;
-    vector<pending_users> pending_notifications;
-} notification_user;
+    vector<EDUsuarioPendente> pending_notifications;
+} EDnotificacaoUsuario;
 
 #endif

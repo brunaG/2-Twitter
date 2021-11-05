@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-typedef struct pkt{
+typedef struct EDPacote{
         int type; // Type of the packet (0 - DATA | 1 - CMD)
         int seqn; //Sequence number
         int length; //Length of message
@@ -11,6 +11,6 @@ typedef struct pkt{
         int envios_faltantes;
         string owner;
         string payload;
-} pkt;
+} EDPacote;
 
 #endif

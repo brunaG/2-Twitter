@@ -30,8 +30,8 @@ void *ConnectServer(void *arg){
 
 int main()
 {
-    Notifications* notification = new Notifications();
-    Notifications* notification_fe = new Notifications();
+    Notificacoes* notification = new Notificacoes();
+    Notificacoes* notification_fe = new Notificacoes();
     InterfaceCliente client (*notification);
     GerenciaConexaoCliente connection (*notification);
     GerenciaConexaoFrontend frontend (*notification_fe);

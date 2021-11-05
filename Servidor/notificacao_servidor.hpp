@@ -41,7 +41,7 @@ class GerenciaNotificacao{
     struct notificacao{
         string perfil;  // perfil-id
         string seguidores[SEGUIDORES];  // vetor de seguidores
-        struct pkt tweet[TWEETS];  // Tweets feitos por este perfil, a serem enviados
+        struct EDPacote tweet[TWEETS];  // Tweets feitos por este perfil, a serem enviados
         struct nao_pendente fila_notificacoes[NOTPENDENTES]; // Fila que indica quais tweet faltam ser enviados
     } notificacao[PERFIS];
 
@@ -58,8 +58,8 @@ class GerenciaNotificacao{
     public:
     GerenciaNotificacao();
     int EnviaTweet(packet* tweet, string perfil);
-    int AdicionaTweet(struct pkt* tweet);
-    void DefineTamanhoPacote(struct pkt* tweet);
+    int AdicionaTweet(struct EDPacote* tweet);
+    void DefineTamanhoPacote(struct EDPacote* tweet);
     void RemoveFilaPendentes(int indice_not, int indice_notfila);
     void RemoveTweet(int indice_not, int indice_tweet);
     int ProcuraSeguidor(string caminho, string perfil_procurado);
@@ -67,7 +67,7 @@ class GerenciaNotificacao{
     int NovoSeguidorNotificacao(string perfil, string seguidor);
     int adicionaLinhaArquivo(string filepath, string line);
     int AdicionaFilaPendentes(int indice_not, int id_tweet);
-    void DefineEnviosPendentes(struct pkt* tweet, struct notificacao* notif);
+    void DefineEnviosPendentes(struct EDPacote* tweet, struct notificacao* notif);
     void NovoPerfil(string perfil);
     int NovoPerfilNotificacao(string perfil);
     void InicializaEstruturaNotificacao();
