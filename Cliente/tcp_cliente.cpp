@@ -1,12 +1,12 @@
 #include "tcp_cliente.hpp"
 
-ClientConnectionManegment::ClientConnectionManegment(Notifications &obj):notification{obj}{
+GerenciaConexaoCliente::GerenciaConexaoCliente(Notifications &obj):notification{obj}{
     //TO DO: We can modify the constructor to receive the port
     PORT = 8080;
     sock = 0;
 }
 
-int ClientConnectionManegment::StabilishConection()
+int GerenciaConexaoCliente::EstabeleceConexao()
 {
     struct sockaddr_in serv_address;
     packet message;
@@ -34,10 +34,10 @@ int ClientConnectionManegment::StabilishConection()
         return -1;
     }
 
-    pthread_create(&th, NULL, &ClientConnectionManegment::ReadSocket, this);
+    pthread_create(&th, NULL, &GerenciaConexaoCliente::LeSocket, this);
 
     while (true){
-        if(GetAndSendNotification(&message) < 0){
+        if(ColetaEnviaMensagem(&message) < 0){
             cout << "Error when sending the message" << endl;
         };
     }
@@ -48,24 +48,24 @@ int ClientConnectionManegment::StabilishConection()
     return 0;
 }
 
-int ClientConnectionManegment::GetAndSendNotification(packet *message){
+int GerenciaConexaoCliente::ColetaEnviaMensagem(packet *message){
     notification.GetNotificationToSend(message);
     return send(sock , message, sizeof(*message), 0);
 }
 
-void* ClientConnectionManegment::ReadSocket(void *ptr){
+void* GerenciaConexaoCliente::LeSocket(void *ptr){
     packet received_message;
     int valread;
 
     while (true){
 
-        valread = read(((ClientConnectionManegment*) ptr) -> sock, &received_message, 1024);
+        valread = read(((GerenciaConexaoCliente*) ptr) -> sock, &received_message, 1024);
         if (valread > 0){
-            ((ClientConnectionManegment*) ptr) -> notification.UpdateBufferToReceive(received_message.type, received_message.length, received_message.seqn, received_message.timestamp, received_message.payload);
+            ((GerenciaConexaoCliente*) ptr) -> notification.UpdateBufferToReceive(received_message.type, received_message.length, received_message.seqn, received_message.timestamp, received_message.payload);
         }
     }
 }
 
-void ClientConnectionManegment::setConnectionAddress(char adress[11]){
+void GerenciaConexaoCliente::defineEnderecoConexao(char adress[11]){
     strcpy(this->connection_address, adress);
 }

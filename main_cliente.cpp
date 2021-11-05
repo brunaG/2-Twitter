@@ -11,8 +11,8 @@ void *CallInterface(void *arg){
 }
 
 void *OpenConnection(void *arg){
-    ClientConnectionManegment obj = * (ClientConnectionManegment *) arg;
-    obj.StabilishConection();
+    GerenciaConexaoCliente obj = * (GerenciaConexaoCliente *) arg;
+    obj.EstabeleceConexao();
     pthread_exit(NULL);
 }
 
@@ -33,7 +33,7 @@ int main()
     Notifications* notification = new Notifications();
     Notifications* notification_fe = new Notifications();
     ClientInterface client (*notification);
-    ClientConnectionManegment connection (*notification);
+    GerenciaConexaoCliente connection (*notification);
     GerenciaConexaoFrontend frontend (*notification_fe);
     pthread_t th1, th2, client_fe, server_fe;
 
@@ -44,7 +44,7 @@ int main()
     //wait for the frontend to bind its address
     sem_wait(frontend.coletaSocketMutex());
     //informing frontend's address to the client
-    connection.setConnectionAddress(frontend.coletaEndereco());
+    connection.defineEnderecoConexao(frontend.coletaEndereco());
 
     //thread to fe connect to server
     pthread_create(&server_fe, NULL, ConnectServer, &frontend);

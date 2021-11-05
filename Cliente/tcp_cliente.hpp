@@ -14,19 +14,19 @@
 using namespace std;
 
 
-class ClientConnectionManegment{
+class GerenciaConexaoCliente{
     char connection_address[11];    //address to connect
     int PORT;
     Notifications &notification;
     int sock;
 
     public:
-    ClientConnectionManegment(Notifications &obj);
-    int StabilishConection();
-    void setConnectionAddress(char adress[11]);
+    GerenciaConexaoCliente(Notifications &obj);
+    int EstabeleceConexao();
+    void defineEnderecoConexao(char adress[11]);
     private:
-    int GetAndSendNotification(packet *message);
-    static void* ReadSocket(void *ptr);
+    int ColetaEnviaMensagem(packet *message);
+    static void* LeSocket(void *ptr);
 };
 
 #endif
