@@ -61,7 +61,7 @@ void* GerenciaConexaoCliente::LeSocket(void *ptr){
 
         valread = read(((GerenciaConexaoCliente*) ptr) -> sock, &received_message, 1024);
         if (valread > 0){
-            ((GerenciaConexaoCliente*) ptr) -> notification.UpdateBufferToReceive(received_message.type, received_message.length, received_message.seqn, received_message.timestamp, received_message.payload);
+            ((GerenciaConexaoCliente*) ptr) -> notification.ColetaNotificacoesReceber(received_message.type, received_message.length, received_message.seqn, received_message.timestamp, received_message.payload);
         }
     }
 }

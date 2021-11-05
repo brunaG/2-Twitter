@@ -16,7 +16,7 @@
 using namespace std;
 
 class Usuario{
-    vector<profile> users_informations;
+    vector<EDPerfil> users_informations;
     string path_database = "./data";
     string format = ".txt";
     map<int,string> usernamesMap = map<int,string>();

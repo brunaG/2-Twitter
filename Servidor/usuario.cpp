@@ -86,7 +86,7 @@ void Usuario::convertePacote(packet message, string user_message, EDPacote* conv
 }
 
 void Usuario::UsuarioSaiu(string user_name, int session){
-    vector<profile>::iterator ptr;
+    vector<EDPerfil>::iterator ptr;
 
     for (ptr = users_informations.begin(); ptr != users_informations.end(); ptr++){
         if (ptr->name == user_name){

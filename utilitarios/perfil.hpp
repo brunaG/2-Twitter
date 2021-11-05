@@ -10,6 +10,6 @@ typedef struct{
     vector<string> following;
     int session1;
     int session2;
-} profile;
+} EDPerfil;
 
 #endif
