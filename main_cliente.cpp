@@ -5,8 +5,8 @@
 using namespace std;
 
 void *CallInterface(void *arg){
-    ClientInterface obj = * (ClientInterface *) arg;
-    obj.CreateInterface();
+    InterfaceCliente obj = * (InterfaceCliente *) arg;
+    obj.CriaInterface();
     pthread_exit(NULL);
 }
 
@@ -32,7 +32,7 @@ int main()
 {
     Notifications* notification = new Notifications();
     Notifications* notification_fe = new Notifications();
-    ClientInterface client (*notification);
+    InterfaceCliente client (*notification);
     GerenciaConexaoCliente connection (*notification);
     GerenciaConexaoFrontend frontend (*notification_fe);
     pthread_t th1, th2, client_fe, server_fe;

@@ -10,23 +10,23 @@
 #define TYPE_COMMAND 1
 using namespace std;
 
-class ClientInterface{
+class InterfaceCliente{
     private:
     string profile;
     Notifications &notification;
     int seqn;
 
-    void SetProfile(string user_profile);
-    void SaveProfileName();
-    void ProcessCommand(string command,int type);
-    string ReadCommand();
+    void DefinePerfil(string user_profile);
+    void SalvaNomePerfil();
+    void ProcessaComandos(string command,int type);
+    string LeComandos();
 
     public:
-    ClientInterface(Notifications &obj);
-    bool isProfileInvalid(string user_profile);
-    void CreateInterface();
-    string GetProfile();
-    static void* GetNewNotification(void *ptr);
+    InterfaceCliente(Notifications &obj);
+    bool perfilInvalido(string user_profile);
+    void CriaInterface();
+    string ColetaPerfil();
+    static void* ColetaNovaNotificacao(void *ptr);
 };
 
 #endif

@@ -1,11 +1,11 @@
 #include <pthread.h>
 #include "interface_cliente.hpp"
 
-ClientInterface::ClientInterface(Notifications &obj):notification{obj}{
+InterfaceCliente::InterfaceCliente(Notifications &obj):notification{obj}{
     seqn = 0;
 }
 
-void ClientInterface::CreateInterface(){
+void InterfaceCliente::CriaInterface(){
     string user_profile;
     //string command;
     pthread_t th;
@@ -18,7 +18,7 @@ void ClientInterface::CreateInterface(){
     getline(cin, user_profile);
     cout << "\n\n\n\n" << endl;
 
-    while (isProfileInvalid(user_profile)){
+    while (perfilInvalido(user_profile)){
         cout << "Your username must to have at least 4 characters and at most 20!" << endl;
         cout << "\n" << endl;
         cout << "Please, inform your username!" << endl;
@@ -27,17 +27,17 @@ void ClientInterface::CreateInterface(){
         cout << "\n" << endl;
     }
 
-    SetProfile(user_profile);
-    ProcessCommand(GetProfile(), TYPE_USER);
+    DefinePerfil(user_profile);
+    ProcessaComandos(ColetaPerfil(), TYPE_USER);
 
-    cout << "****** Welcome " << GetProfile() << " ******" << endl;
+    cout << "****** Welcome " << ColetaPerfil() << " ******" << endl;
     cout << "To create a post, you can use the command 'SEND' followed by your message!" << endl;
     cout << "To follow a user, you can use the command 'FOLLOW' followed by the username!" << endl;
 
-    pthread_create(&th, NULL, &ClientInterface::GetNewNotification, this);
+    pthread_create(&th, NULL, &InterfaceCliente::ColetaNovaNotificacao, this);
 
     while (true){
-        ProcessCommand(ReadCommand(),TYPE_COMMAND);
+        ProcessaComandos(LeComandos(),TYPE_COMMAND);
     }   
 
     pthread_join(th, NULL);
@@ -46,18 +46,18 @@ void ClientInterface::CreateInterface(){
 /*
     UNUSED
 */
-void ClientInterface::SaveProfileName(){
-    char user_converted[GetProfile().size()+1];
-    strcpy(user_converted, GetProfile().c_str());
+void InterfaceCliente::SalvaNomePerfil(){
+    char user_converted[ColetaPerfil().size()+1];
+    strcpy(user_converted, ColetaPerfil().c_str());
 
-    notification.UpdateBufferToSend(0, seqn, GetProfile().length(), time(0), user_converted);
+    notification.UpdateBufferToSend(0, seqn, ColetaPerfil().length(), time(0), user_converted);
     seqn++;
 }
 
-bool ClientInterface::isProfileInvalid(string user_profile){
+bool InterfaceCliente::perfilInvalido(string user_profile){
     return (user_profile.length() < 4) || (user_profile.length() > 20);
 }
-string ClientInterface::ReadCommand(){
+string InterfaceCliente::LeComandos(){
     string command;
     cout << "\n" << endl;
     cin.ignore(-1);
@@ -65,7 +65,7 @@ string ClientInterface::ReadCommand(){
     return command;
 }
 
-void ClientInterface::ProcessCommand(string command, int type){
+void InterfaceCliente::ProcessaComandos(string command, int type){
     char convertedCommand[command.length() + 1];
     strcpy(convertedCommand, command.c_str());
     notification.UpdateBufferToSend(type, seqn, command.length(), time(0), convertedCommand);
@@ -73,18 +73,18 @@ void ClientInterface::ProcessCommand(string command, int type){
 
 }
 
-void ClientInterface::SetProfile(string user_profile){
+void InterfaceCliente::DefinePerfil(string user_profile){
     profile = "@" + user_profile;
 }
 
-string ClientInterface::GetProfile(){
+string InterfaceCliente::ColetaPerfil(){
     return profile;
 }
 
-void* ClientInterface::GetNewNotification(void *ptr){
+void* InterfaceCliente::ColetaNovaNotificacao(void *ptr){
     packet new_notification;
     while (true){
-        ((ClientInterface*) ptr) -> notification.GetNotificationToReceive(&new_notification);
+        ((InterfaceCliente*) ptr) -> notification.GetNotificationToReceive(&new_notification);
         cout << "**********************************" << endl;
         cout << "***You have a new notification!***" << endl;
         cout << "**********************************" << endl;
