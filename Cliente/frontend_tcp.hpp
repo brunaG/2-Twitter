@@ -18,7 +18,7 @@
 #include "../utilitarios/pacote.hpp"
 using namespace std;
 
-class FrontendConnectionManagement{
+class GerenciaConexaoFrontend{
     char addr[11];    //frontend's address
     int PORT;
     int client_socket;
@@ -31,21 +31,21 @@ class FrontendConnectionManagement{
 
 
     public:
-    FrontendConnectionManagement(Notifications &obj);
-    static void* ReadFromClient(void *arg);
-    static void* ReadFromServer(void *arg);
-    int SendMessage(packet pkt, int socket);
-    static void printPacket (packet pkt);
-    int establishConnection();
-    int ConnectToServer();
-    int addNewSocket(int socket);
-    void deleteSocket(int socket);
-    bool isSocketAlive(int socket);
-    char* getAdress();
-    int getClientSocket();
-    sem_t* getMutexSocket();
+    GerenciaConexaoFrontend(Notifications &obj);
+    static void* LeCliente(void *arg);
+    static void* LeServidor(void *arg);
+    int LeMensagem(packet pkt, int socket);
+    static void imprimePacote (packet pkt);
+    int estabeleceConexao();
+    int ConectaServidor();
+    int adicionanovosocket(int socket);
+    void deletaSocket(int socket);
+    bool socketAtivo(int socket);
+    char* coletaEndereco();
+    int coletaSocketCliente();
+    sem_t* coletaSocketMutex();
     private:
-    int GetAndSendNotification(packet *message);
+    int ColetaEnviaMensagem(packet *message);
 };
 
 #endif

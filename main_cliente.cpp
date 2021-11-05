@@ -17,14 +17,14 @@ void *OpenConnection(void *arg){
 }
 
 void *BootFrontend(void *arg){
-    FrontendConnectionManagement *obj = (FrontendConnectionManagement *) arg;
-    obj->establishConnection();
+    GerenciaConexaoFrontend *obj = (GerenciaConexaoFrontend *) arg;
+    obj->estabeleceConexao();
     pthread_exit(NULL);
 }
 
 void *ConnectServer(void *arg){
-    FrontendConnectionManagement *obj = (FrontendConnectionManagement *) arg;
-    obj->ConnectToServer();
+    GerenciaConexaoFrontend *obj = (GerenciaConexaoFrontend *) arg;
+    obj->ConectaServidor();
     pthread_exit(NULL);
 }
 
@@ -34,17 +34,17 @@ int main()
     Notifications* notification_fe = new Notifications();
     ClientInterface client (*notification);
     ClientConnectionManegment connection (*notification);
-    FrontendConnectionManagement frontend (*notification_fe);
+    GerenciaConexaoFrontend frontend (*notification_fe);
     pthread_t th1, th2, client_fe, server_fe;
 
     //init unitary semaphore to wait while the frontend is booted
-    sem_init(frontend.getMutexSocket(), 0, 0);
+    sem_init(frontend.coletaSocketMutex(), 0, 0);
     //booting frontend on a new thread
     pthread_create(&client_fe, NULL, BootFrontend, &frontend);
     //wait for the frontend to bind its address
-    sem_wait(frontend.getMutexSocket());
+    sem_wait(frontend.coletaSocketMutex());
     //informing frontend's address to the client
-    connection.setConnectionAddress(frontend.getAdress());
+    connection.setConnectionAddress(frontend.coletaEndereco());
 
     //thread to fe connect to server
     pthread_create(&server_fe, NULL, ConnectServer, &frontend);

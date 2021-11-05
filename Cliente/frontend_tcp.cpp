@@ -3,11 +3,11 @@
 
 typedef struct thread_args{
     int socket_;
-    FrontendConnectionManagement* obj;
+    GerenciaConexaoFrontend* obj;
 } Thread_args;
 
 
-FrontendConnectionManagement::FrontendConnectionManagement(Notifications &obj):notification{obj}{
+GerenciaConexaoFrontend::GerenciaConexaoFrontend(Notifications &obj):notification{obj}{
     PORT = 8080;
     strcpy(addr, "127.0.0.");
 
@@ -18,7 +18,7 @@ FrontendConnectionManagement::FrontendConnectionManagement(Notifications &obj):n
     sem_init(&mutex_socket, 0, 1);
 };
 
-int FrontendConnectionManagement::establishConnection(){
+int GerenciaConexaoFrontend::estabeleceConexao(){
     int opt = 1;
     int master_socket;
     struct sockaddr_in address;
@@ -86,8 +86,8 @@ int FrontendConnectionManagement::establishConnection(){
         }
 
         //creating threads to read from client and send to client
-        pthread_create(&th_read_client, NULL, &FrontendConnectionManagement::ReadFromClient, this);  //TODO
-        pthread_create(&th_read_server, NULL, &FrontendConnectionManagement::ReadFromServer, this);  //TODO
+        pthread_create(&th_read_client, NULL, &GerenciaConexaoFrontend::LeCliente, this);  //TODO
+        pthread_create(&th_read_server, NULL, &GerenciaConexaoFrontend::LeServidor, this);  //TODO
 
         pthread_join(th_read_client, NULL);
         pthread_join(th_read_server, NULL);
@@ -103,7 +103,7 @@ int FrontendConnectionManagement::establishConnection(){
 
 }
 
-int FrontendConnectionManagement::ConnectToServer(){
+int GerenciaConexaoFrontend::ConectaServidor(){
     struct sockaddr_in serv_addr;
     packet message;
     pthread_t th;
@@ -132,10 +132,10 @@ int FrontendConnectionManagement::ConnectToServer(){
         return -1;
     }
 
-    pthread_create(&th, NULL, &FrontendConnectionManagement::ReadFromServer, this);
+    pthread_create(&th, NULL, &GerenciaConexaoFrontend::LeServidor, this);
 
     while (true){
-        if(GetAndSendNotification(&message) < 0){
+        if(ColetaEnviaMensagem(&message) < 0){
             cout << "Error when sending the message" << endl;
         };
     }
@@ -147,14 +147,14 @@ int FrontendConnectionManagement::ConnectToServer(){
     return 0;
 }
 
-int FrontendConnectionManagement::GetAndSendNotification(packet *message){
+int GerenciaConexaoFrontend::ColetaEnviaMensagem(packet *message){
     notification.GetNotificationToSend(message);
     return send(server_socket , message, sizeof(*message), 0);
 }
 
-void* FrontendConnectionManagement::ReadFromClient(void *arg){
+void* GerenciaConexaoFrontend::LeCliente(void *arg){
     packet pkt;
-    FrontendConnectionManagement connection = *(FrontendConnectionManagement *) arg;
+    GerenciaConexaoFrontend connection = *(GerenciaConexaoFrontend *) arg;
     int socket = connection.client_socket;
 
     while(true){
@@ -164,12 +164,12 @@ void* FrontendConnectionManagement::ReadFromClient(void *arg){
             pthread_exit(0);
         }
 
-        if (connection.SendMessage(pkt, connection.server_socket) < 0)
+        if (connection.LeMensagem(pkt, connection.server_socket) < 0)
             printf("Failed to send message to server\n");
     }
 }
 
-void FrontendConnectionManagement::printPacket (packet pkt){
+void GerenciaConexaoFrontend::imprimePacote (packet pkt){
     printf("type: %d\n", pkt.type);
     printf("seqn: %d\n", pkt.seqn);
     printf("length: %d\n", pkt.length);
@@ -179,28 +179,28 @@ void FrontendConnectionManagement::printPacket (packet pkt){
 
 }
 
-char* FrontendConnectionManagement::getAdress(){
+char* GerenciaConexaoFrontend::coletaEndereco(){
     return addr;
 }
 
-sem_t* FrontendConnectionManagement::getMutexSocket(){
+sem_t* GerenciaConexaoFrontend::coletaSocketMutex(){
     return &this->mutex_socket;
 }
 
-void* FrontendConnectionManagement::ReadFromServer(void *ptr){
+void* GerenciaConexaoFrontend::LeServidor(void *ptr){
     packet received_message;
-    FrontendConnectionManagement connection = *(FrontendConnectionManagement *) ptr;
+    GerenciaConexaoFrontend connection = *(GerenciaConexaoFrontend *) ptr;
 
     while (true){
         if( read(connection.server_socket, &received_message, 1024) < 0){
             printf("Failed to read from server\n");
         } else {
-            if (connection.SendMessage(received_message, connection.client_socket) < 0)
+            if (connection.LeMensagem(received_message, connection.client_socket) < 0)
             printf("FRONTEND: Failed to foward message\n");
         }
     }
 }
 
-int FrontendConnectionManagement::SendMessage(packet pkt, int socket){
+int GerenciaConexaoFrontend::LeMensagem(packet pkt, int socket){
     return send(socket , &pkt, sizeof(pkt), 0);
 }

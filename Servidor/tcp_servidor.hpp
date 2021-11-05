@@ -49,7 +49,7 @@ class ServerConnectionManagement{
     static void* ReadMessage(void *arg);
     static void* SendMessage(void *arg);
     static void* ConfirmTransaction(void *arg);
-    static void printPacket (packet pkt);
+    static void imprimePacote (packet pkt);
     int establishConnection();
     int runAsReplica();
     int addNewSocket(int socket);

@@ -6,8 +6,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
 
-# Make data base, printed on Fri Nov  5 14:36:43 2021
+# Make data base, printed on Fri Nov  5 15:57:15 2021
 
 # Variables
 
@@ -16,9 +17,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?F = $(notdir $?)
 # makefile (from `Makefile', line 4)
-SERVER := main_server.cpp Server/replica.cpp Server/server_notification.cpp Server/server_tcp.cpp Server/users.cpp Server/replica.hpp Server/server_notification.hpp Server/server_tcp.hpp Server/users.hpp Utils/notification.cpp Utils/utils.cpp
+SERVER := main_servidor.cpp Servidor/notificacao_servidor.cpp Servidor/replica.cpp Servidor/tcp_servidor.cpp Servidor/usuario.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
 # makefile (from `Makefile', line 2)
-SRC := Server/replica.cpp Server/server_notification.cpp Server/server_tcp.cpp Server/users.cpp main_server.cpp main_client.cpp Client/client_interface.cpp Client/client_tcp.cpp Client/frontend_tcp.cpp Utils/notification.cpp Utils/utils.cpp
+SRC := main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
 # environment
 VSCODE_LOG_NATIVE = false
 # automatic
@@ -28,11 +29,11 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/labgonzaga/Documents/Documents - Bruna’s MacBook Pro/Bruna g/UFRGS/2021:1/SISTEMAS OPERACIONAIS II/trabalho 2/Twitter
+CURDIR := /Users/labgonzaga/Documents/Documents - Bruna’s MacBook Pro/Bruna g/UFRGS/2021:1/SISTEMAS OPERACIONAIS II/trabalho 2/2-Twitter
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"pt-br","availableLanguages":{"*":"pt-br"},"_languagePackId":"6ea46340c3154fe0fe6192383ce27dbf.pt-br","_translationsConfigFile":"/Users/labgonzaga/Library/Application Support/Code/clp/6ea46340c3154fe0fe6192383ce27dbf.pt-br/tcf.json","_cacheRoot":"/Users/labgonzaga/Library/Application Support/Code/clp/6ea46340c3154fe0fe6192383ce27dbf.pt-br","_resolvedLanguagePackCoreLocation":"/Users/labgonzaga/Library/Application Support/Code/clp/6ea46340c3154fe0fe6192383ce27dbf.pt-br/b3318bc0524af3d74034b8bb8a64df0ccf35549a","_corruptedFile":"/Users/labgonzaga/Library/Application Support/Code/clp/6ea46340c3154fe0fe6192383ce27dbf.pt-br/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"pt-br","availableLanguages":{"*":"pt-br"},"_languagePackId":"3f7c34f4001d0c7d48d3c63ebba2d753.pt-br","_translationsConfigFile":"/Users/labgonzaga/Library/Application Support/Code/clp/3f7c34f4001d0c7d48d3c63ebba2d753.pt-br/tcf.json","_cacheRoot":"/Users/labgonzaga/Library/Application Support/Code/clp/3f7c34f4001d0c7d48d3c63ebba2d753.pt-br","_resolvedLanguagePackCoreLocation":"/Users/labgonzaga/Library/Application Support/Code/clp/3f7c34f4001d0c7d48d3c63ebba2d753.pt-br/b3318bc0524af3d74034b8bb8a64df0ccf35549a","_corruptedFile":"/Users/labgonzaga/Library/Application Support/Code/clp/3f7c34f4001d0c7d48d3c63ebba2d753.pt-br/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
 # makefile (from `Makefile', line 1)
@@ -42,7 +43,7 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/90/_2md55md4qn0spm5962pxlx80000gn/T/vscode-ipc-88bbacd7-f3e0-41e9-a0e8-2f5eddc3df64.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/90/_2md55md4qn0spm5962pxlx80000gn/T/vscode-ipc-81c58ac7-99e6-4560-895f-f486fd38bfd8.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -62,7 +63,7 @@ DISPLAY = /private/tmp/com.apple.launchd.xrG9V1TfkS/org.xquartz:0
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /Users/labgonzaga/Documents/Documents - Bruna’s MacBook Pro/Bruna g/UFRGS/2021:1/SISTEMAS OPERACIONAIS II/trabalho 2/Twitter
+PWD = /Users/labgonzaga/Documents/Documents - Bruna’s MacBook Pro/Bruna g/UFRGS/2021:1/SISTEMAS OPERACIONAIS II/trabalho 2/2-Twitter
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
@@ -90,7 +91,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 1
 # makefile (from `Makefile', line 3)
-CLIENT := main_client.cpp Client/client_interface.cpp Client/client_tcp.cpp Client/frontend_tcp.cpp Utils/notification.cpp Utils/utils.cpp
+CLIENT := main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
 # default
 MAKE_VERSION := 3.81
 # environment
@@ -144,7 +145,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 3902
+VSCODE_PID = 6698
 # variable set hash-table stats:
 # Load=67/1024=7%, Rehash=0, Collisions=1/101=1%
 
@@ -154,12 +155,13 @@ VSCODE_PID = 3902
 
 # Directories
 
-# Utils (device 16777220, inode 34352638): 13 files, no impossibilities.
-# . (device 16777220, inode 34352625): 11 files, no impossibilities.
-# Server (device 16777220, inode 34352629): 10 files, no impossibilities.
-# Client (device 16777220, inode 34352654): 8 files, no impossibilities.
+# . (device 16777220, inode 34448299): 12 files, no impossibilities.
+# Servidor (device 16777220, inode 34448386): 10 files, no impossibilities.
+# utilitarios (device 16777220, inode 34448398): 13 files, no impossibilities.
+# Server: could not be stat'd.
+# Cliente (device 16777220, inode 34448378): 8 files, no impossibilities.
 
-# 42 files, no impossibilities in 4 directories.
+# 43 files, no impossibilities in 5 directories.
 
 # Implicit Rules
 
@@ -168,12 +170,30 @@ VSCODE_PID = 3902
 # Files
 
 # Not a target:
-Server/server_tcp.hpp:
+utilitarios/utilitarios.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-11-05 15:57:10
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Servidor/notificacao_servidor.cpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-all: Server/replica.cpp Server/server_notification.cpp Server/server_tcp.cpp Server/users.cpp main_server.cpp main_client.cpp Client/client_interface.cpp Client/client_tcp.cpp Client/frontend_tcp.cpp Utils/notification.cpp Utils/utils.cpp
+# Not a target:
+Cliente/interface_cliente.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-11-05 15:57:10
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+all: main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
 #  Command-line target.
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: `'
@@ -187,15 +207,15 @@ all: Server/replica.cpp Server/server_notification.cpp Server/server_tcp.cpp Ser
 # automatic
 # * := 
 # automatic
-# + := Server/replica.cpp Server/server_notification.cpp Server/server_tcp.cpp Server/users.cpp main_server.cpp main_client.cpp Client/client_interface.cpp Client/client_tcp.cpp Client/frontend_tcp.cpp Utils/notification.cpp Utils/utils.cpp
+# + := main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
 # automatic
 # | := 
 # automatic
-# < := Server/replica.cpp
+# < := main_servidor.cpp
 # automatic
-# ^ := Server/replica.cpp Server/server_notification.cpp Server/server_tcp.cpp Server/users.cpp main_server.cpp main_client.cpp Client/client_interface.cpp Client/client_tcp.cpp Client/frontend_tcp.cpp Utils/notification.cpp Utils/utils.cpp
+# ^ := main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
 # automatic
-# ? := Server/replica.cpp Server/server_notification.cpp Server/server_tcp.cpp Server/users.cpp main_server.cpp main_client.cpp Client/client_interface.cpp Client/client_tcp.cpp Client/frontend_tcp.cpp Utils/notification.cpp Utils/utils.cpp
+# ? := main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/14=7%
 #  commands to execute (from `Makefile', line 6):
@@ -203,37 +223,18 @@ all: Server/replica.cpp Server/server_notification.cpp Server/server_tcp.cpp Ser
 	g++ $(FLAGS) $(CLIENT) -o client
 	
 
-client: main_client.cpp Client/client_interface.cpp Client/client_tcp.cpp Client/frontend_tcp.cpp Utils/notification.cpp Utils/utils.cpp
+client: main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 13):
-	g++ $(FLAGS) main_client.cpp Client/*.cpp Utils/*.cpp -o client
+	g++ $(FLAGS) main_cliente.cpp Cliente/*.cpp utilitarios/*.cpp -o client
 	
 
 # Not a target:
-main_client.cpp:
+Cliente/frontend_tcp.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-05-13 11:57:06
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-Server/users.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2021-05-13 11:57:06
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
- 
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-Server/server_notification.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2021-05-13 11:57:06
+#  Last modified 2021-11-05 15:57:10
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -246,53 +247,48 @@ Server/server_notification.cpp:
 #  File has not been updated.
 
 # Not a target:
-Server/users.hpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-05-13 11:57:06
+#  Last modified 2021-11-05 15:57:10
+ 
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-server: main_server.cpp Server/replica.cpp Server/server_notification.cpp Server/server_tcp.cpp Server/users.cpp Server/replica.hpp Server/server_notification.hpp Server/server_tcp.hpp Server/users.hpp Utils/notification.cpp Utils/utils.cpp
+server: main_servidor.cpp Servidor/notificacao_servidor.cpp Servidor/replica.cpp Servidor/tcp_servidor.cpp Servidor/usuario.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 10):
-	g++ $(FLAGS) main_server.cpp Server/*.cpp -o server
+	g++ $(FLAGS) main_servidor.cpp Servidor/*.cpp -o server
 	
 
 # Not a target:
-main_server.cpp:
+main_servidor.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-05-13 11:57:06
+#  Last modified 2021-11-05 15:57:10
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-Server/server_notification.hpp:
+Cliente/tcp_cliente.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-11-05 15:57:10
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Servidor/usuario.cpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-Client/client_interface.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2021-05-13 11:57:06
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-run_replicas: main_server.cpp Server/replica.cpp Server/server_notification.cpp Server/server_tcp.cpp Server/users.cpp Server/replica.hpp Server/server_notification.hpp Server/server_tcp.hpp Server/users.hpp Utils/notification.cpp Utils/utils.cpp
+run_replicas: main_servidor.cpp Servidor/notificacao_servidor.cpp Servidor/replica.cpp Servidor/tcp_servidor.cpp Servidor/usuario.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -308,22 +304,10 @@ run_replicas: main_server.cpp Server/replica.cpp Server/server_notification.cpp 
 	
 
 # Not a target:
-Client/client_tcp.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2021-05-13 11:57:06
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-Client/frontend_tcp.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2021-05-13 11:57:06
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+Servidor/tcp_servidor.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -332,49 +316,31 @@ Client/frontend_tcp.cpp:
 #  File has not been updated.
 
 # Not a target:
-Utils/notification.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2021-05-13 11:57:06
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-Server/replica.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2021-05-13 11:57:06
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-Server/replica.hpp:
+Servidor/replica.cpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-Server/server_tcp.cpp:
+main_cliente.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-05-13 11:57:06
+#  Last modified 2021-11-05 15:57:10
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-Utils/utils.cpp:
+utilitarios/notificacao.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-05-13 11:57:06
+#  Last modified 2021-11-05 15:57:10
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
-# Load=22/1024=2%, Rehash=0, Collisions=1/75=1%
+# Load=18/1024=2%, Rehash=0, Collisions=0/59=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -386,6 +352,6 @@ Utils/utils.cpp:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Nov  5 14:36:43 2021
+# Finished Make data base on Fri Nov  5 15:57:15 2021
 
  

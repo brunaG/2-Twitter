@@ -302,7 +302,7 @@ void* ServerConnectionManagement::ReadMessage(void *arg){
             pthread_exit(0);
         }
 
-        printPacket(pkt);
+        imprimePacote(pkt);
 
         /*
         for (int i = 0; i < (int) replicas_list->size(); i++){
@@ -382,7 +382,7 @@ void* ServerConnectionManagement::ConfirmTransaction(void *arg){
     return 0;
 }
 
-void ServerConnectionManagement::printPacket (packet pkt){
+void ServerConnectionManagement::imprimePacote (packet pkt){
     printf("type: %d\n", pkt.type);
     printf("seqn: %d\n", pkt.seqn);
     printf("length: %d\n", pkt.length);
@@ -647,7 +647,7 @@ int ServerConnectionManagement::runAsReplica(){
             pkt.timestamp = pkt_rep.timestamp;
             int sck = pkt_rep.socket;
 
-            printPacket(pkt);
+            imprimePacote(pkt);
 
             //proccess message
             users.NewMessageFromClient(pkt, sck);

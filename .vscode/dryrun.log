@@ -1,6 +1,6 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/labgonzaga/Documents/Documents - Bruna’s MacBook Pro/Bruna g/UFRGS/2021:1/SISTEMAS OPERACIONAIS II/trabalho 2/Twitter'
-g++ -pthread -Wall -g -std=c++11 main_server.cpp Server/replica.cpp Server/server_notification.cpp Server/server_tcp.cpp Server/users.cpp Server/replica.hpp Server/server_notification.hpp Server/server_tcp.hpp Server/users.hpp Utils/notification.cpp Utils/utils.cpp -o server
-g++ -pthread -Wall -g -std=c++11 main_client.cpp Client/client_interface.cpp Client/client_tcp.cpp Client/frontend_tcp.cpp Utils/notification.cpp Utils/utils.cpp -o client
-make: Leaving directory `/Users/labgonzaga/Documents/Documents - Bruna’s MacBook Pro/Bruna g/UFRGS/2021:1/SISTEMAS OPERACIONAIS II/trabalho 2/Twitter'
+make: Entering directory `/Users/labgonzaga/Documents/Documents - Bruna’s MacBook Pro/Bruna g/UFRGS/2021:1/SISTEMAS OPERACIONAIS II/trabalho 2/2-Twitter'
+g++ -pthread -Wall -g -std=c++11 main_servidor.cpp Servidor/notificacao_servidor.cpp Servidor/replica.cpp Servidor/tcp_servidor.cpp Servidor/usuario.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp -o server
+g++ -pthread -Wall -g -std=c++11 main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp -o client
+make: Leaving directory `/Users/labgonzaga/Documents/Documents - Bruna’s MacBook Pro/Bruna g/UFRGS/2021:1/SISTEMAS OPERACIONAIS II/trabalho 2/2-Twitter'
  
