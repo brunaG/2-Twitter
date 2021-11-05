@@ -18,7 +18,7 @@ void Usuario::defineID(int id){
     notificationManager.defineID(id);
 }
 
-void Usuario::DeletaUsuarioSocket(int socket){
+void Usuario::DeletaSocketUsuario(int socket){
     usernamesMap.erase(socket);
 }
 

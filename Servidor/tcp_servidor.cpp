@@ -258,7 +258,7 @@ void ServerConnectionManagement::deleteSocket(int socket){
             break;
         }
     }
-    users.DeletaUsuarioSocket(socket);
+    users.DeletaSocketUsuario(socket);
     sem_post(&mutex_socket);
 }
 

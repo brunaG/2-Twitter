@@ -30,7 +30,7 @@ class Usuario{
     void novaMensagemCliente(packet message, int socket);
     void UsuarioSaiu(string user_name, int session);
     int ColetaMensagem(int socket, packet* pkt_tweet);
-    void DeletaUsuarioSocket(int socket);
+    void DeletaSocketUsuario(int socket);
     void defineID(int id);
 
 };
