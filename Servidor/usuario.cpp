@@ -1,28 +1,28 @@
 #include "usuario.hpp"
 #include "../utilitarios/usuario_pendente.hpp"
 
-NotificationManager manager;
+GerenciaNotificacao manager;
 
-Users::Users(){
+Usuario::Usuario(){
     sem_init(&buffer_empty, 0, 30);  //TO DO: Create a file of conStants to add the 30 value
     sem_init(&mutex_p, 0, 1);
     sem_init(&buffer_full, 0, 0);
     sem_init(&mutex_c, 0, 1);
     sem_init(&buffer_notification_empty, 0, 30);
     sem_init(&buffer_notification_full, 0, 0);
-    notificationManager.InicializaEDnotification();
+    notificationManager.InicializaEstruturaNotificacao();
 }
 
-void Users::setID(int id){
+void Usuario::defineID(int id){
     server_ID = id;
-    notificationManager.setID(id);
+    notificationManager.defineID(id);
 }
 
-void Users::DeleteUserSocket(int socket){
+void Usuario::DeletaUsuarioSocket(int socket){
     usernamesMap.erase(socket);
 }
 
-void Users::NewMessageFromClient(packet message, int socket){
+void Usuario::novaMensagemCliente(packet message, int socket){
 
     string user_name;
     string user_message;
@@ -65,7 +65,7 @@ void Users::NewMessageFromClient(packet message, int socket){
             pkt tweetToSend;
             user_message = normal_message.substr(5, command_length);
             user_name = usernamesMap[socket];
-            convertPacket(message, user_message, &tweetToSend, user_name);
+            convertePacote(message, user_message, &tweetToSend, user_name);
             notificationManager.AdicionaTweet(&tweetToSend);
             sem_post(&mutex_p);
             sem_post(&buffer_notification_full);
@@ -75,7 +75,7 @@ void Users::NewMessageFromClient(packet message, int socket){
 
 }
 
-void Users::convertPacket(packet message, string user_message, pkt* converted, string sender){
+void Usuario::convertePacote(packet message, string user_message, pkt* converted, string sender){
     converted->type = message.type;
     converted->length = message.length;
     converted->timestamp = message.timestamp;
@@ -85,7 +85,7 @@ void Users::convertPacket(packet message, string user_message, pkt* converted, s
     converted->owner = sender;
 }
 
-void Users::UserLogOut(string user_name, int session){
+void Usuario::UsuarioSaiu(string user_name, int session){
     vector<profile>::iterator ptr;
 
     for (ptr = users_informations.begin(); ptr != users_informations.end(); ptr++){
@@ -100,7 +100,7 @@ void Users::UserLogOut(string user_name, int session){
     }
 }
 
-int Users::GetMessage(int socket, packet* pkt_tweet){
+int Usuario::ColetaMensagem(int socket, packet* pkt_tweet){
     sem_wait(&buffer_notification_full);
     //sem_wait(&mutex_c);
     int erro = notificationManager.EnviaTweet(pkt_tweet, usernamesMap[socket]);

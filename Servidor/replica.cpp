@@ -12,22 +12,22 @@ Replica::Replica(){
     this->socket = -1;
 };
 
-string Replica::getAddress(){
+string Replica::pegaEndereco(){
     return this->address;
 }
 
-int Replica::getID(){
+int Replica::coletaID(){
     return this->id;
 }
 
-void Replica::setSocket(int sock){
+void Replica::defineSocket(int sock){
     this->socket = sock;
 }
 
-void Replica::setId(int i){
+void Replica::defineID(int i){
     this->id = i;
 }
 
-int Replica::getSocket(){
+int Replica::coletaSocket(){
     return this->socket;
 }

@@ -25,53 +25,53 @@ using namespace std;
 #define NOTPENDENTES 100
 #define DEFAULTPATH "./data"
 
-class NotificationManager{
+class GerenciaNotificacao{
 
     // Estrutura de um tweet: é o que recebe do Cliente
 
     // Estrutura que fica na fila de notificações pendentes.
     // Precisa identificar apenas o id do tweet e o perfil a ser enviado.
-    struct not_pendente{
+    struct nao_pendente{
         int seqn; //Sequence number
         string perfil;
-    } not_pendente;
+    } nao_pendente;
 
     // Estrutura de uma notificação: identificada pelo perfil
     // Cada instância é uma linha do quadro do módulo de notificações
-    struct notification{
+    struct notificacao{
         string perfil;  // perfil-id
         string seguidores[SEGUIDORES];  // vetor de seguidores
         struct pkt tweet[TWEETS];  // Tweets feitos por este perfil, a serem enviados
-        struct not_pendente fila_notificacoes[NOTPENDENTES]; // Fila que indica quais tweet faltam ser enviados
-    } notification[PERFIS];
+        struct nao_pendente fila_notificacoes[NOTPENDENTES]; // Fila que indica quais tweet faltam ser enviados
+    } notificacao[PERFIS];
 
-    struct perfis{  // Criei mas não estou usando. Toda essa info fica em arquivo
+    struct perfils{  // Criei mas não estou usando. Toda essa info fica em arquivo
         string nome;
         string seguidores[SEGUIDORES];
         string seguindo[SEGUIDORES];
         string sessao1;
         string sessao2;
-    } perfis;
+    } perfils;
 
     int server_ID;
 
     public:
-    NotificationManager();
+    GerenciaNotificacao();
     int EnviaTweet(packet* tweet, string perfil);
     int AdicionaTweet(struct pkt* tweet);
-    void SetPktLenght(struct pkt* tweet);
-    void RemoveNotFila(int indice_not, int indice_notfila);
+    void DefineTamanhoPacote(struct pkt* tweet);
+    void RemoveFilaPendentes(int indice_not, int indice_notfila);
     void RemoveTweet(int indice_not, int indice_tweet);
     int ProcuraSeguidor(string caminho, string perfil_procurado);
     int NovoSeguidor(string perfil, string seguidor);
     int NovoSeguidorNotificacao(string perfil, string seguidor);
-    int appendLineToFile(string filepath, string line);
-    int IncluiNaFilaNotPendentes(int indice_not, int id_tweet);
-    void SetEnviosFaltantes(struct pkt* tweet, struct notification* notif);
+    int adicionaLinhaArquivo(string filepath, string line);
+    int AdicionaFilaPendentes(int indice_not, int id_tweet);
+    void DefineEnviosPendentes(struct pkt* tweet, struct notificacao* notif);
     void NovoPerfil(string perfil);
     int NovoPerfilNotificacao(string perfil);
-    void InicializaEDnotification();
-    void setID(int id);
+    void InicializaEstruturaNotificacao();
+    void defineID(int id);
 };
 
 #endif

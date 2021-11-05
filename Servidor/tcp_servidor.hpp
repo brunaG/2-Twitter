@@ -35,7 +35,7 @@ class ServerConnectionManagement{
     pthread_t th_read[30];
     pthread_t th_send[30];
     sem_t mutex_socket;
-    Users users;
+    Usuario users;
     vector<string> replicas_addrs;
     vector<Replica> replicas;
     string IP_addr;

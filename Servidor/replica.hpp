@@ -28,11 +28,11 @@ class Replica{
     public:
     Replica(string ip);
     Replica();
-    string getAddress();
-    int getID();
-    void setId(int i);
-    void setSocket(int sock);
-    int getSocket();
+    string pegaEndereco();
+    int coletaID();
+    void defineID(int i);
+    void defineSocket(int sock);
+    int coletaSocket();
 };
 
 #endif

@@ -4,7 +4,7 @@
 typedef struct thread_args{
     int socket_;
     ServerConnectionManagement* obj;
-    Users* users_obj;
+    Usuario* users_obj;
 
 } Thread_args;
 
@@ -19,7 +19,7 @@ typedef struct confirm_args{
     vector<Replica> *replicas;
     packet pkt;
     int socket;
-    Users* users_obj;
+    Usuario* users_obj;
 } Confirm_args;
 
 string addressToStr(sockaddr_in address){
@@ -40,8 +40,8 @@ ServerConnectionManagement::ServerConnectionManagement(int id, string ip, string
     IP_addr = ip;
     ID_server = id;
     type_server = type;
-    users = Users();
-    users.setID(id);
+    users = Usuario();
+    users.defineID(id);
 
     //initialise all client_socket[] to 0 so not checked
     for (int i = 0; i < max_clients; i++)
@@ -87,7 +87,7 @@ int ServerConnectionManagement::establishConnection(){
     cout << "Servidor type: " << type_server << endl;
 
     for (int i=0; i< (int) replicas.size(); i++){
-        cout << "Replica: " << replicas[i].getAddress() << endl;
+        cout << "Replica: " << replicas[i].pegaEndereco() << endl;
     }
 
     //type of socket created
@@ -258,7 +258,7 @@ void ServerConnectionManagement::deleteSocket(int socket){
             break;
         }
     }
-    users.DeleteUserSocket(socket);
+    users.DeletaUsuarioSocket(socket);
     sem_post(&mutex_socket);
 }
 
@@ -274,7 +274,7 @@ void* ServerConnectionManagement::SendMessage(void *arg){
             break;
         }
         else{
-            int erro = ((Users*) th_struct.users_obj) -> GetMessage(socket, &notification);
+            int erro = ((Usuario*) th_struct.users_obj) -> ColetaMensagem(socket, &notification);
             if (erro == -1){
                 cout << "getMessage nao funcionou!" << endl;
             }
@@ -327,7 +327,7 @@ void* ServerConnectionManagement::ReadMessage(void *arg){
         args.pkt = pkt;
         args.replicas = replicas_list;
         args.socket = socket;
-        args.users_obj = ((Users*) th_struct.users_obj);
+        args.users_obj = ((Usuario*) th_struct.users_obj);
         pthread_t th_confirm;
         pthread_create(&th_confirm, NULL, &ServerConnectionManagement::ConfirmTransaction, &args);
         
@@ -344,7 +344,7 @@ void* ServerConnectionManagement::ConfirmTransaction(void *arg){
 
     for (int i = 0; i < (int) replicas_list->size(); i++){
         //cout << "Replica socket: " << (*replicas_list)[i].getSocket() << endl;
-        if ( (*replicas_list)[i].getSocket() < 0)
+        if ( (*replicas_list)[i].coletaSocket() < 0)
             continue;
         
         //building packet to replica
@@ -357,27 +357,27 @@ void* ServerConnectionManagement::ConfirmTransaction(void *arg){
         strncpy(pkt_rep.payload, pkt.payload, sizeof(pkt_rep.payload));
 
         //sending the packet
-        if( send((*replicas_list)[i].getSocket(), &pkt_rep, sizeof(pkt_rep), MSG_NOSIGNAL) != sizeof(pkt_rep) ) {
+        if( send((*replicas_list)[i].coletaSocket(), &pkt_rep, sizeof(pkt_rep), MSG_NOSIGNAL) != sizeof(pkt_rep) ) {
             perror("send");
-            cout << "Replica " << (*replicas_list)[i].getID() << " disconnected! Ignoring it..." << endl;
-            close ( (*replicas_list)[i].getSocket() );
-            (*replicas_list)[i].setSocket(-1);
+            cout << "Replica " << (*replicas_list)[i].coletaID() << " disconnected! Ignoring it..." << endl;
+            close ( (*replicas_list)[i].coletaSocket() );
+            (*replicas_list)[i].defineSocket(-1);
         }
         //if packet was send with success, wait for acknowledgement
         else {
             bzero(&pkt, sizeof(pkt));
             if (read( socket , &pkt, sizeof(pkt)) <= 0) {
                 perror("read");
-                cout << "Replica " << (*replicas_list)[i].getID() << " could not answer! Disconnecting it..." << endl;
-                close ( (*replicas_list)[i].getSocket() );
-                (*replicas_list)[i].setSocket(-1);
+                cout << "Replica " << (*replicas_list)[i].coletaID() << " could not answer! Disconnecting it..." << endl;
+                close ( (*replicas_list)[i].coletaSocket() );
+                (*replicas_list)[i].defineSocket(-1);
                 continue;
             }
-            printf("\nReplica %d ... ACK!\n", (*replicas_list)[i].getID());
+            printf("\nReplica %d ... ACK!\n", (*replicas_list)[i].coletaID());
         }
     }
 
-    ((Users*) arg_struct.users_obj) -> NewMessageFromClient(pkt, socket);
+    ((Usuario*) arg_struct.users_obj) -> novaMensagemCliente(pkt, socket);
     
     return 0;
 }
@@ -422,7 +422,7 @@ int ServerConnectionManagement::connectToGroup(){
 
         //getting replica's address
         struct sockaddr_in struct_address;
-        string address = replicas[i].getAddress();
+        string address = replicas[i].pegaEndereco();
 
         struct_address.sin_family = AF_INET;
         struct_address.sin_port = htons(30000);
@@ -459,13 +459,13 @@ int ServerConnectionManagement::connectToGroup(){
             cout << "Failed to read response id message from " << address.c_str() << endl;
             continue;
         } else
-            replicas[i].setId(atoi(response.payload));
+            replicas[i].defineID(atoi(response.payload));
 
         if (response.type == 4)
             primaryindex = i;
 
         //finally adds the socket to the replica's entry on *replicas vector*
-        replicas[i].setSocket(sockfd);
+        replicas[i].defineSocket(sockfd);
     }
 
     return primaryindex;
@@ -538,14 +538,14 @@ void* ServerConnectionManagement::listenToGroup(void *arg){
         vector<Replica>* replicas = localserver->getReplicas();
         for(int i = 0; i < (int) replicas->size(); i++)
         {
-            if ( ip_address == (*replicas)[i].getAddress() )
+            if ( ip_address == (*replicas)[i].pegaEndereco() )
             {
                 int greeting_result;
                 greeting_result = localserver->execGreetingProtocol(replica_socket, &(*replicas)[i]);
 
                 if(greeting_result >= 0)
                 {
-                    (*replicas)[i].setSocket(replica_socket);
+                    (*replicas)[i].defineSocket(replica_socket);
                     printf("Replica at %s connected\n", ip_address.c_str());
                 }
                 break;
@@ -561,7 +561,7 @@ int ServerConnectionManagement::execGreetingProtocol(int sockfd, Replica *replic
         cout << "Failed to read id message" << endl;
         return -1;
     }else
-        replica->setId(atoi(idpacket.payload));
+        replica->defineID(atoi(idpacket.payload));
 
     packet response;
     if(localserver->getType() == "primario")
@@ -604,8 +604,8 @@ int ServerConnectionManagement::runAsReplica(){
     p_index = connectToGroup();
     if (p_index >= 0){
         primary = replicas[p_index];
-        printf("Servidor id %d is the leader\n", primary.getID());
-        lider = primary.getID();
+        printf("Servidor id %d is the leader\n", primary.coletaID());
+        lider = primary.coletaID();
     }
     else{
         printf("No primary server found\n");
@@ -626,8 +626,8 @@ int ServerConnectionManagement::runAsReplica(){
         int status;
 
         for (int i=0; i<(int)replicas.size();i++){
-            if (replicas[i].getID() == lider){
-                primary_socket = replicas[i].getSocket();
+            if (replicas[i].coletaID() == lider){
+                primary_socket = replicas[i].coletaSocket();
             }
         }
 
@@ -650,7 +650,7 @@ int ServerConnectionManagement::runAsReplica(){
             imprimePacote(pkt);
 
             //proccess message
-            users.NewMessageFromClient(pkt, sck);
+            users.novaMensagemCliente(pkt, sck);
 
             //send acknowledgement
             packet response;
@@ -686,19 +686,19 @@ void ServerConnectionManagement::startElection(){
         for(int i=0; i< (int) replicas.size();i++) //vetor das replicas
         {
             // Se a replica do la�o tiver id maior que a replica atual
-            if(replicas[i].getID() > ID_server)  // *** Percorrer o vetor de replicas
+            if(replicas[i].coletaID() > ID_server)  // *** Percorrer o vetor de replicas
             {
                 //Envia pkt
                 //TO DO: CRIAR O PKT PARA ENVIAR
-                maiores_sock.push_back(replicas[i].getSocket());
+                maiores_sock.push_back(replicas[i].coletaSocket());
                 packet idpacket;
                 idpacket.type = 3;
                 idpacket.seqn = 0;
                 idpacket.length = sizeof(to_string(ID_server).c_str());
                 strcpy(idpacket.payload, to_string(ID_server).c_str());
-                cout << "Sending election to: " << replicas[i].getSocket() << endl;
-                cout << "Sending election to ID: " << replicas[i].getID() << endl;
-                int status = send(replicas[i].getSocket(), &idpacket, sizeof(idpacket), MSG_NOSIGNAL);
+                cout << "Sending election to: " << replicas[i].coletaSocket() << endl;
+                cout << "Sending election to ID: " << replicas[i].coletaID() << endl;
+                int status = send(replicas[i].coletaSocket(), &idpacket, sizeof(idpacket), MSG_NOSIGNAL);
                 if( status < 0 ){
                     perror("send");
                     cout << "Failed to send packet to election**" << endl;
@@ -719,7 +719,7 @@ void ServerConnectionManagement::startElection(){
                 idpacket.seqn = 0;
                 idpacket.length = sizeof(to_string(ID_server).c_str());
                 strcpy(idpacket.payload, to_string(ID_server).c_str());
-                if( send(replicas[i].getSocket(), &idpacket, sizeof(idpacket), MSG_NOSIGNAL) != sizeof(idpacket) ){
+                if( send(replicas[i].coletaSocket(), &idpacket, sizeof(idpacket), MSG_NOSIGNAL) != sizeof(idpacket) ){
                     perror("send");
                     cout << "Failed to send packet to election**" << endl;
                 }
@@ -750,7 +750,7 @@ void ServerConnectionManagement::startElection(){
                     idpacket.seqn = 0;
                     idpacket.length = sizeof(to_string(ID_server).c_str());
                     strcpy(idpacket.payload, to_string(ID_server).c_str());
-                    if( send(replicas[i].getSocket(), &idpacket, sizeof(idpacket), MSG_NOSIGNAL) != sizeof(idpacket) ){
+                    if( send(replicas[i].coletaSocket(), &idpacket, sizeof(idpacket), MSG_NOSIGNAL) != sizeof(idpacket) ){
                         perror("send");
                         cout << "Failed to send packet to election**" << endl;
                     } // *** send(indicador de novo lider) para as outras replicas
@@ -763,7 +763,7 @@ void ServerConnectionManagement::startElection(){
                 for(int i=0; i< (int) replicas.size();i++){
                     election_args elect_th;
                     elect_th.resp = &resposta;
-                    elect_th.socket_ = replicas[i].getSocket();
+                    elect_th.socket_ = replicas[i].coletaSocket();
                     elect_th.id = &lider_atual;
                     pthread_create(&listen_lider[i], NULL, &ServerConnectionManagement::waitLider, &elect_th);
                 }

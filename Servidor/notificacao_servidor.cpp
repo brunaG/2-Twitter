@@ -1,14 +1,14 @@
 #include "notificacao_servidor.hpp"
 
-NotificationManager::NotificationManager(){
-    InicializaEDnotification();
+GerenciaNotificacao::GerenciaNotificacao(){
+    InicializaEstruturaNotificacao();
 }
 
-void NotificationManager::setID(int id){
+void GerenciaNotificacao::defineID(int id){
     server_ID = id;
 }
 
-int NotificationManager::NovoSeguidor(string perfil, string seguidor){
+int GerenciaNotificacao::NovoSeguidor(string perfil, string seguidor){
     // Inclui um novo seguidor -> insere novo seguidor no arquivo do perfil
     // Adiciona este seguidor na estrutura de notificações deste perfil
     ifstream inFile;
@@ -29,7 +29,7 @@ int NotificationManager::NovoSeguidor(string perfil, string seguidor){
 
     if(flag_busca == 0){
 
-        retorno = appendLineToFile(caminho + perfil + formato, seguidor);
+        retorno = adicionaLinhaArquivo(caminho + perfil + formato, seguidor);
 
         if(retorno != 0){
             cout << "---------- ERRO ESCRITA NO ARQUIVO ----------";
@@ -43,7 +43,7 @@ int NotificationManager::NovoSeguidor(string perfil, string seguidor){
     return 0;
 }
 
-void NotificationManager::NovoPerfil(string perfil){
+void GerenciaNotificacao::NovoPerfil(string perfil){
     // Para novos usuários.
     // Cria um arquivo novo, caso não exista este perfil.
     // Cria nova instância de notification para o novo perfil.
@@ -63,7 +63,7 @@ void NotificationManager::NovoPerfil(string perfil){
     NovoPerfilNotificacao(perfil);
 }
 
-void NotificationManager::RemoveTweet(int indice_not, int indice_tweet){
+void GerenciaNotificacao::RemoveTweet(int indice_not, int indice_tweet){
 
     // Verifica se o próximo tweet é NULL. Se sim, só remover
     if(notification[indice_not].tweet[indice_tweet+1].payload == "NULL"){
@@ -92,7 +92,7 @@ void NotificationManager::RemoveTweet(int indice_not, int indice_tweet){
     }
 }
 
-int NotificationManager::EnviaTweet(packet* tweet, string perfil){
+int GerenciaNotificacao::EnviaTweet(packet* tweet, string perfil){
     // Procura @perfil nas filas de not pendentes
     // Quando encontra o 1o, salva o tweet. Quando encontra um novo, verifica se é mais antigo que este. Se for, substitui na struct
     // No final, tem-se o notification e o índice do tweet mais antigo
@@ -196,13 +196,13 @@ int NotificationManager::EnviaTweet(packet* tweet, string perfil){
         tweet->timestamp = notification[not_final].tweet[tweet_final].timestamp;
         strcpy(tweet->payload, nova_msg.c_str());
 
-        RemoveNotFila(not_final, indice_fila_final);
+        RemoveFilaPendentes(not_final, indice_fila_final);
 
         return 0;
     }
 }
 
-void NotificationManager::RemoveNotFila(int indice_not, int indice_notfila){
+void GerenciaNotificacao::RemoveFilaPendentes(int indice_not, int indice_notfila){
     // Quando uma notificação é enviada para o Cliente
     // Remove a notificação da fila de notificações pendentes.
     // Decrementa os envios faltantes do tweet em questão.
@@ -240,7 +240,7 @@ void NotificationManager::RemoveNotFila(int indice_not, int indice_notfila){
 
 }
 
-int NotificationManager::appendLineToFile(string filepath, string line){
+int GerenciaNotificacao::adicionaLinhaArquivo(string filepath, string line){
     // Função para escrever na última linha do arquivo.
 
     std::ofstream file;
@@ -258,7 +258,7 @@ int NotificationManager::appendLineToFile(string filepath, string line){
     return 0;
 }
 
-int NotificationManager::ProcuraSeguidor(string caminho, string perfil_procurado){
+int GerenciaNotificacao::ProcuraSeguidor(string caminho, string perfil_procurado){
     // Retorna uma flag indicando se o seguidor já está no arquivo.
     // Se já existe = retorna 1. Senão, 0.
 
@@ -303,14 +303,14 @@ int NotificationManager::ProcuraSeguidor(string caminho, string perfil_procurado
 
 }
 
-void NotificationManager::SetPktLenght(struct pkt* tweet){
+void GerenciaNotificacao::DefineTamanhoPacote(struct pkt* tweet){
     // Seta o tamanho da mensagem do tweet.
     // Não utilizada: este valor já vem do client.
 
     tweet->length = tweet->payload.size();
 }
 
-void NotificationManager::SetEnviosFaltantes(struct pkt* tweet, struct notification* notif){
+void GerenciaNotificacao::SetEnviosFaltantes(struct pkt* tweet, struct notification* notif){
     // Seta a quantidade total de envios que um tweet terá:
     //           quantidade é o número de seguidores deste perfil;
 
@@ -321,7 +321,7 @@ void NotificationManager::SetEnviosFaltantes(struct pkt* tweet, struct notificat
     tweet->envios_faltantes = num_seguidores;
 }
 
-int NotificationManager::IncluiNaFilaNotPendentes(int indice_not, int id_tweet){
+int GerenciaNotificacao::AdicionaFilaPendentes(int indice_not, int id_tweet){
     // Quando é recebido um novo tweet do perfil, a fila de notificações
     //pendentes é atualizada:
     // Inclui-se [id tweet, seguidor1], [id tweet, seguidor...], [id tweet, seguidorn]
@@ -367,7 +367,7 @@ int NotificationManager::IncluiNaFilaNotPendentes(int indice_not, int id_tweet){
 
 }
 
-int NotificationManager::AdicionaTweet(struct pkt* tweet){
+int GerenciaNotificacao::AdicionaTweet(struct pkt* tweet){
     // Para quando é recebido um tweet de um perfil do Cliente.
     // Adiciona o tweet do seu respectivo perfil na estrutura de notificações.
     // Chama a atualização da fila de notificações.
@@ -418,12 +418,12 @@ int NotificationManager::AdicionaTweet(struct pkt* tweet){
 
     }
     cout << "Notificacao: " << notification[i].tweet[n].payload << endl;
-    IncluiNaFilaNotPendentes(i, notification[i].tweet[n].seqn);
+    AdicionaFilaPendentes(i, notification[i].tweet[n].seqn);
     return 0;
 
 }
 
-int NotificationManager::NovoPerfilNotificacao(string perfil){
+int GerenciaNotificacao::NovoPerfilNotificacao(string perfil){
     // Adiciona um perfil na estrutura de notificações.
 
     string linha;
@@ -453,7 +453,7 @@ int NotificationManager::NovoPerfilNotificacao(string perfil){
     return 0;
 }
 
-int NotificationManager::NovoSeguidorNotificacao(string perfil, string seguidor){
+int GerenciaNotificacao::NovoSeguidorNotificacao(string perfil, string seguidor){
     // Adiciona um seguidor ao perfil na estrutura de notificações.
 
     int indice_not = 0, indice_seg = 0, ja_existe = 0;
@@ -491,7 +491,7 @@ int NotificationManager::NovoSeguidorNotificacao(string perfil, string seguidor)
 
 }
 
-void NotificationManager::InicializaEDnotification(){
+void GerenciaNotificacao::InicializaEstruturaNotificacao(){
     // Inicialização do Módulo de Notificações
 
     int i, n, k, z;
