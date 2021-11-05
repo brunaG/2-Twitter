@@ -1,153 +1,245 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-# GNU Make 3.81
-# Copyright (C) 2006  Free Software Foundation, Inc.
-# This is free software; see the source for copying conditions.
-# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
-# PARTICULAR PURPOSE.
+# GNU Make 4.2.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
 
-# This program built for i386-apple-darwin11.3.0
- 
-
-# Make data base, printed on Fri Nov  5 15:57:15 2021
+# Make data base, printed on Fri Nov  5 18:22:27 2021
 
 # Variables
 
+# 'override' directive
+GNUMAKEFLAGS := 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
-# makefile (from `Makefile', line 4)
-SERVER := main_servidor.cpp Servidor/notificacao_servidor.cpp Servidor/replica.cpp Servidor/tcp_servidor.cpp Servidor/usuario.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
-# makefile (from `Makefile', line 2)
-SRC := main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
+# environment
+PAPERSIZE = a4
+# environment
+DESKTOP_SESSION = ubuntu
+# default
+.SHELLFLAGS := -c
+# makefile (from 'Makefile', line 4)
+SERVER := main_servidor.cpp Servidor/notificacao_servidor.cpp Servidor/tcp_servidor.cpp Servidor/replica.cpp Servidor/usuario.cpp utilitarios/utilitarios.cpp utilitarios/notificacao.cpp
+# environment
+XDG_SESSION_CLASS = user
+# makefile (from 'Makefile', line 2)
+SRC := main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/tcp_cliente.cpp Cliente/interface_cliente.cpp utilitarios/utilitarios.cpp utilitarios/notificacao.cpp
+# environment
+XDG_SESSION_TYPE = x11
 # environment
 VSCODE_LOG_NATIVE = false
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
+# environment
+IM_CONFIG_PHASE = 1
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
-# automatic
-@F = $(notdir $@)
+# environment
+XAUTHORITY = /run/user/1000/gdm/Xauthority
+# environment
+GDMSESSION = ubuntu
+# environment
+XMODIFIERS = @im=ibus
 # makefile
-CURDIR := /Users/labgonzaga/Documents/Documents - Bruna’s MacBook Pro/Bruna g/UFRGS/2021:1/SISTEMAS OPERACIONAIS II/trabalho 2/2-Twitter
+CURDIR := /home/bruna/Área de Trabalho/2-Twitter
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"pt-br","availableLanguages":{"*":"pt-br"},"_languagePackId":"3f7c34f4001d0c7d48d3c63ebba2d753.pt-br","_translationsConfigFile":"/Users/labgonzaga/Library/Application Support/Code/clp/3f7c34f4001d0c7d48d3c63ebba2d753.pt-br/tcf.json","_cacheRoot":"/Users/labgonzaga/Library/Application Support/Code/clp/3f7c34f4001d0c7d48d3c63ebba2d753.pt-br","_resolvedLanguagePackCoreLocation":"/Users/labgonzaga/Library/Application Support/Code/clp/3f7c34f4001d0c7d48d3c63ebba2d753.pt-br/b3318bc0524af3d74034b8bb8a64df0ccf35549a","_corruptedFile":"/Users/labgonzaga/Library/Application Support/Code/clp/3f7c34f4001d0c7d48d3c63ebba2d753.pt-br/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"pt-br","availableLanguages":{"*":"pt-br"},"_languagePackId":"6ea46340c3154fe0fe6192383ce27dbf.pt-br","_translationsConfigFile":"/home/bruna/.config/Code/clp/6ea46340c3154fe0fe6192383ce27dbf.pt-br/tcf.json","_cacheRoot":"/home/bruna/.config/Code/clp/6ea46340c3154fe0fe6192383ce27dbf.pt-br","_resolvedLanguagePackCoreLocation":"/home/bruna/.config/Code/clp/6ea46340c3154fe0fe6192383ce27dbf.pt-br/6cba118ac49a1b88332f312a8f67186f7f3c1643","_corruptedFile":"/home/bruna/.config/Code/clp/6ea46340c3154fe0fe6192383ce27dbf.pt-br/corrupted.info","_languagePackSupport":true}
 # environment
-_ = /usr/bin/make
-# makefile (from `Makefile', line 1)
+_ = /usr/share/code/code
+# environment
+JOURNAL_STREAM = 8:29797
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+# makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
+# environment
+USERNAME = bruna
+# environment
+MAKELEVEL := 0
+# environment
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-__CFBundleIdentifier = com.microsoft.VSCode
+MANAGERPID = 967
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/90/_2md55md4qn0spm5962pxlx80000gn/T/vscode-ipc-81c58ac7-99e6-4560-895f-f486fd38bfd8.sock
+LESSOPEN = | /usr/bin/lesspipe %s
 # environment
-VSCODE_CWD = /
+LC_NAME = es_UY.UTF-8
 # environment
-PATH = /opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Apple/usr/bin
+VSCODE_CWD = /home/bruna
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# environment
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# environment
+GJS_DEBUG_OUTPUT = stderr
+# environment
+SESSION_MANAGER = local/bruna-VirtualBox:@/tmp/.ICE-unix/1239,unix/bruna-VirtualBox:/tmp/.ICE-unix/1239
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+XDG_MENU_PREFIX = gnome-
 # environment
 VSCODE_LOG_STACK = false
 # environment
-ELECTRON_RUN_AS_NODE = 1
-# default
-.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=0f33bc2f-5234-4da7-b25f-4216ffbafdfd&iid=0f33bc2f-5234-4da7-b25f-4216ffbafdfd&sid=0f33bc2f-5234-4da7-b25f-4216ffbafdfd","uploadToServer":true}
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.B2HFpdYgdX/Listeners
+INVOCATION_ID = d7b1c3fcf1854bc8abefbb71bb8f5a86
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# environment
+LS_COLORS = 
+# environment
+XDG_SESSION_DESKTOP = ubuntu
+# environment
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 1690
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.xrG9V1TfkS/org.xquartz:0
+DISPLAY = :0
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /Users/labgonzaga/Documents/Documents - Bruna’s MacBook Pro/Bruna g/UFRGS/2021:1/SISTEMAS OPERACIONAIS II/trabalho 2/2-Twitter
+PWD = /home/bruna/Área de Trabalho/2-Twitter
+# default
+.LOADED := 
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+SSH_AGENT_PID = 1190
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+# environment
+GTK_MODULES = gail:atk-bridge
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
 # environment
-HOME = /Users/labgonzaga
-# default
-MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
+HOME = /home/bruna
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/labgonzaga/Library/Application Support/Code/CachedData/b3318bc0524af3d74034b8bb8a64df0ccf35549a
+LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
-LOGNAME = labgonzaga
+VSCODE_CODE_CACHE_PATH = /home/bruna/.config/Code/CachedData/6cba118ac49a1b88332f312a8f67186f7f3c1643
+# environment
+LOGNAME = bruna
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# automatic
++F = $(notdir $+)
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
-XPC_FLAGS = 0x0
+LC_TIME = es_UY.UTF-8
 # default
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
-SHLVL = 1
-# makefile (from `Makefile', line 3)
-CLIENT := main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
-# default
-MAKE_VERSION := 3.81
+QT_IM_MODULE = ibus
 # environment
-USER = labgonzaga
+SHLVL = 0
+# makefile (from 'Makefile', line 3)
+CLIENT := main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/tcp_cliente.cpp Cliente/interface_cliente.cpp utilitarios/utilitarios.cpp utilitarios/notificacao.cpp
+# environment
+GNOME_SHELL_SESSION_MODE = ubuntu
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-2ec5536e-2d62-49cf-abcc-0a58bcf7deeb.sock
+# default
+MAKE_VERSION := 4.2.1
+# environment
+USER = bruna
+# environment
+LC_MONETARY = es_UY.UTF-8
 # makefile
 .DEFAULT_GOAL := all
+# environment
+XDG_CURRENT_DESKTOP = Unity
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
+# environment
+LC_TELEPHONE = es_UY.UTF-8
 # default
-MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
+MAKE_COMMAND := make
 # default
 .VARIABLES := 
-# environment
-TMPDIR = /var/folders/90/_2md55md4qn0spm5962pxlx80000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/labgonzaga/Library/Application Support/Code/1.62.0-main.sock
-# makefile
-MAKEFLAGS = Rrqp
+LANGUAGE = pt_BR:pt_PT:en
 # environment
-MFLAGS = -Rrqp
+VSCODE_IPC_HOOK = /run/user/1000/vscode-6341e0d2-1.61.2-main.sock
+# makefile
+MAKEFLAGS = pqrR
+# environment
+MFLAGS = -pqrR
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.34295589.34295598
+BREAKPAD_DUMP_LOCATION = /home/bruna/.config/Code/exthost Crash Reports
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
-# automatic
-+F = $(notdir $+)
 # environment
-__CF_USER_TEXT_ENCODING = 0x1F5:0:0
+GDK_BACKEND = x11
 # environment
-COMMAND_MODE = unix2003
+LC_PAPER = es_UY.UTF-8
+# environment
+QT_ACCESSIBILITY = 1
 # default
 MAKEFILES := 
+# environment
+LC_NUMERIC = es_UY.UTF-8
 # automatic
 <F = $(notdir $<)
 # environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+LC_MEASUREMENT = es_UY.UTF-8
+# environment
 LC_ALL = C
+# environment
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # automatic
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
-# makefile (from `Makefile', line 1)
+# makefile (from 'Makefile', line 1)
 FLAGS = -pthread -Wall -g -std=c++11
-# default
-.INCLUDE_DIRS = /usr/local/include
 # environment
-MAKELEVEL := 0
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+WINDOWPATH = 2
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# environment
+LC_IDENTIFICATION = es_UY.UTF-8
+# default
+.RECIPEPREFIX := 
+# environment
+LC_ADDRESS = es_UY.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 6698
+VSCODE_PID = 1690
 # variable set hash-table stats:
-# Load=67/1024=7%, Rehash=0, Collisions=1/101=1%
+# Load=114/1024=11%, Rehash=0, Collisions=19/150=13%
 
 # Pattern-specific Variable Values
 
@@ -155,13 +247,13 @@ VSCODE_PID = 6698
 
 # Directories
 
-# . (device 16777220, inode 34448299): 12 files, no impossibilities.
-# Servidor (device 16777220, inode 34448386): 10 files, no impossibilities.
-# utilitarios (device 16777220, inode 34448398): 13 files, no impossibilities.
+# . (device 2053, inode 817109): 14 files, no impossibilities.
+# Servidor (device 2053, inode 817455): 10 files, no impossibilities.
+# utilitarios (device 2053, inode 817467): 13 files, no impossibilities.
 # Server: could not be stat'd.
-# Cliente (device 16777220, inode 34448378): 8 files, no impossibilities.
+# Cliente (device 2053, inode 817447): 8 files, no impossibilities.
 
-# 43 files, no impossibilities in 5 directories.
+# 45 files, no impossibilities in 5 directories.
 
 # Implicit Rules
 
@@ -172,11 +264,9 @@ VSCODE_PID = 6698
 # Not a target:
 utilitarios/utilitarios.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-05 15:57:10
+#  Last modified 2021-11-05 15:36:30.178535492
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 Servidor/notificacao_servidor.cpp:
@@ -187,16 +277,15 @@ Servidor/notificacao_servidor.cpp:
 # Not a target:
 Cliente/interface_cliente.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-05 15:57:10
+ 
+#  Last modified 2021-11-05 17:11:59.05686567
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-all: main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
-#  Command-line target.
+all: main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/tcp_cliente.cpp Cliente/interface_cliente.cpp utilitarios/utilitarios.cpp utilitarios/notificacao.cpp
+#  Command line target.
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: `'
+#  Implicit/static pattern stem: ''
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
@@ -207,38 +296,34 @@ all: main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interfa
 # automatic
 # * := 
 # automatic
-# + := main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
+# + := main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/tcp_cliente.cpp Cliente/interface_cliente.cpp utilitarios/utilitarios.cpp utilitarios/notificacao.cpp
 # automatic
 # | := 
 # automatic
 # < := main_servidor.cpp
 # automatic
-# ^ := main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
+# ^ := main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/tcp_cliente.cpp Cliente/interface_cliente.cpp utilitarios/utilitarios.cpp utilitarios/notificacao.cpp
 # automatic
-# ? := main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
+# ? := main_servidor.cpp main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/tcp_cliente.cpp Cliente/interface_cliente.cpp utilitarios/utilitarios.cpp utilitarios/notificacao.cpp
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/14=7%
-#  commands to execute (from `Makefile', line 6):
+# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  recipe to execute (from 'Makefile', line 6):
 	g++ $(FLAGS) $(SERVER) -o server
 	g++ $(FLAGS) $(CLIENT) -o client
-	
 
-client: main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/interface_cliente.cpp Cliente/tcp_cliente.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
+client: main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/tcp_cliente.cpp Cliente/interface_cliente.cpp utilitarios/utilitarios.cpp utilitarios/notificacao.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 13):
+#  recipe to execute (from 'Makefile', line 13):
 	g++ $(FLAGS) main_cliente.cpp Cliente/*.cpp utilitarios/*.cpp -o client
-	
 
 # Not a target:
 Cliente/frontend_tcp.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-05 15:57:10
+#  Last modified 2021-11-05 17:11:59.05686567
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .SUFFIXES:
@@ -249,38 +334,30 @@ Cliente/frontend_tcp.cpp:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-05 15:57:10
- 
+#  Last modified 2021-11-05 15:36:30.166535153
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-server: main_servidor.cpp Servidor/notificacao_servidor.cpp Servidor/replica.cpp Servidor/tcp_servidor.cpp Servidor/usuario.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
+server: main_servidor.cpp Servidor/notificacao_servidor.cpp Servidor/tcp_servidor.cpp Servidor/replica.cpp Servidor/usuario.cpp utilitarios/utilitarios.cpp utilitarios/notificacao.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 10):
+#  recipe to execute (from 'Makefile', line 10):
 	g++ $(FLAGS) main_servidor.cpp Servidor/*.cpp -o server
-	
 
 # Not a target:
 main_servidor.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-05 15:57:10
+#  Last modified 2021-11-05 15:36:30.170535266
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 Cliente/tcp_cliente.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-05 15:57:10
+#  Last modified 2021-11-05 17:23:57.172119304
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 Servidor/usuario.cpp:
@@ -288,11 +365,11 @@ Servidor/usuario.cpp:
 #  Modification time never checked.
 #  File has not been updated.
 
-run_replicas: main_servidor.cpp Servidor/notificacao_servidor.cpp Servidor/replica.cpp Servidor/tcp_servidor.cpp Servidor/usuario.cpp utilitarios/notificacao.cpp utilitarios/utilitarios.cpp
+run_replicas: main_servidor.cpp Servidor/notificacao_servidor.cpp Servidor/tcp_servidor.cpp Servidor/replica.cpp Servidor/usuario.cpp utilitarios/utilitarios.cpp utilitarios/notificacao.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 16):
+#  recipe to execute (from 'Makefile', line 16):
 	./server 1 127.0.0.1 primario
 	sleep 1.5
 	./server 2 127.0.0.2 replica
@@ -301,7 +378,6 @@ run_replicas: main_servidor.cpp Servidor/notificacao_servidor.cpp Servidor/repli
 	sleep 1.5
 	./server 4 127.0.0.4 replica
 	sleep 1.5
-	
 
 # Not a target:
 Servidor/tcp_servidor.cpp:
@@ -324,34 +400,31 @@ Servidor/replica.cpp:
 # Not a target:
 main_cliente.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-05 15:57:10
+#  Last modified 2021-11-05 17:11:59.060865758
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 utilitarios/notificacao.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-05 15:57:10
+#  Last modified 2021-11-05 18:12:40.153154796
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
-# Load=18/1024=2%, Rehash=0, Collisions=0/59=0%
+# Load=18/1024=2%, Rehash=0, Collisions=0/57=0%
 # VPATH Search Paths
 
-# No `vpath' search paths.
+# No 'vpath' search paths.
 
-# No general (`VPATH' variable) search path.
+# No general ('VPATH' variable) search path.
 
-# # of strings in strcache: 1
-# # of strcache buffers: 1
-# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
-# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+# strcache buffers: 1 (0) / strings = 55 / storage = 854 B / avg = 15 B
+# current buf: size = 8162 B / used = 854 B / count = 55 / avg = 15 B
 
-# Finished Make data base on Fri Nov  5 15:57:15 2021
+# strcache performance: lookups = 94 / hit rate = 41%
+# hash-table stats:
+# Load=55/8192=1%, Rehash=0, Collisions=4/94=4%
+# Finished Make data base on Fri Nov  5 18:22:27 2021
 
  

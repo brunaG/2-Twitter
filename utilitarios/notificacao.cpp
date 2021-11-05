@@ -43,7 +43,7 @@ void Notificacoes::AtualizaBufferEnviar(uint16_t type, uint16_t seqn, uint16_t l
 
 }
 
-void Notificacoes::UpdateBufferToReceive(uint16_t type, uint16_t seqn, uint16_t length, int16_t timestamp, char* payload){
+void Notificacoes::AtualizaBufferReceber(uint16_t type, uint16_t seqn, uint16_t length, int16_t timestamp, char* payload){
     packet message;
 
     sem_wait(&buffer_to_receive_empty);
