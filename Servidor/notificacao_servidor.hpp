@@ -38,12 +38,12 @@ class GerenciaNotificacao{
 
     // Estrutura de uma notificação: identificada pelo perfil
     // Cada instância é uma linha do quadro do módulo de notificações
-    struct notificacao{
+    struct notification{
         string perfil;  // perfil-id
         string seguidores[SEGUIDORES];  // vetor de seguidores
         struct EDPacote tweet[TWEETS];  // Tweets feitos por este perfil, a serem enviados
         struct nao_pendente fila_notificacoes[NOTPENDENTES]; // Fila que indica quais tweet faltam ser enviados
-    } notificacao[PERFIS];
+    } notification[PERFIS];
 
     struct perfils{  // Criei mas não estou usando. Toda essa info fica em arquivo
         string nome;
@@ -67,7 +67,7 @@ class GerenciaNotificacao{
     int NovoSeguidorNotificacao(string perfil, string seguidor);
     int adicionaLinhaArquivo(string filepath, string line);
     int AdicionaFilaPendentes(int indice_not, int id_tweet);
-    void DefineEnviosPendentes(struct EDPacote* tweet, struct notificacao* notif);
+    void DefineEnviosPendentes(struct EDPacote* tweet, struct notification* notif);
     void NovoPerfil(string perfil);
     int NovoPerfilNotificacao(string perfil);
     void InicializaEstruturaNotificacao();

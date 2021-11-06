@@ -310,7 +310,7 @@ void GerenciaNotificacao::DefineTamanhoPacote(struct EDPacote* tweet){
     tweet->length = tweet->payload.size();
 }
 
-void GerenciaNotificacao::SetEnviosFaltantes(struct EDPacote* tweet, struct notification* notif){
+void GerenciaNotificacao::DefineEnviosPendentes(struct EDPacote* tweet, struct notification* notif){
     // Seta a quantidade total de envios que um tweet terá:
     //           quantidade é o número de seguidores deste perfil;
 

@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Nov  5 18:22:27 2021
+# Make data base, printed on Sat Nov  6 16:53:16 2021
 
 # Variables
 
@@ -53,7 +53,7 @@ VSCODE_NLS_CONFIG = {"locale":"pt-br","availableLanguages":{"*":"pt-br"},"_langu
 # environment
 _ = /usr/share/code/code
 # environment
-JOURNAL_STREAM = 8:29797
+JOURNAL_STREAM = 8:28692
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'Makefile', line 1)
@@ -73,7 +73,7 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-MANAGERPID = 967
+MANAGERPID = 919
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -89,7 +89,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-SESSION_MANAGER = local/bruna-VirtualBox:@/tmp/.ICE-unix/1239,unix/bruna-VirtualBox:/tmp/.ICE-unix/1239
+SESSION_MANAGER = local/bruna-VirtualBox:@/tmp/.ICE-unix/1191,unix/bruna-VirtualBox:/tmp/.ICE-unix/1191
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -99,7 +99,7 @@ VSCODE_LOG_STACK = false
 # environment
 VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=0f33bc2f-5234-4da7-b25f-4216ffbafdfd&iid=0f33bc2f-5234-4da7-b25f-4216ffbafdfd&sid=0f33bc2f-5234-4da7-b25f-4216ffbafdfd","uploadToServer":true}
 # environment
-INVOCATION_ID = d7b1c3fcf1854bc8abefbb71bb8f5a86
+INVOCATION_ID = 9c60d18ddbc74915b7cd8eb2b6a6b495
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -109,7 +109,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 1690
+GIO_LAUNCHED_DESKTOP_FILE_PID = 1560
 # automatic
 %F = $(notdir $%)
 # environment
@@ -121,7 +121,7 @@ PWD = /home/bruna/Área de Trabalho/2-Twitter
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1190
+SSH_AGENT_PID = 1143
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -161,7 +161,7 @@ CLIENT := main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/tcp_cliente.cpp Clie
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-2ec5536e-2d62-49cf-abcc-0a58bcf7deeb.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-149e34b3-0003-4ff6-adfc-ed53665a4a52.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -237,7 +237,7 @@ LC_ADDRESS = es_UY.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1690
+VSCODE_PID = 1560
 # variable set hash-table stats:
 # Load=114/1024=11%, Rehash=0, Collisions=19/150=13%
 
@@ -355,7 +355,7 @@ main_servidor.cpp:
 # Not a target:
 Cliente/tcp_cliente.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-05 17:23:57.172119304
+#  Last modified 2021-11-05 18:28:58.629503933
 #  File has been updated.
 #  Successfully updated.
 
@@ -425,6 +425,6 @@ utilitarios/notificacao.cpp:
 # strcache performance: lookups = 94 / hit rate = 41%
 # hash-table stats:
 # Load=55/8192=1%, Rehash=0, Collisions=4/94=4%
-# Finished Make data base on Fri Nov  5 18:22:27 2021
+# Finished Make data base on Sat Nov  6 16:53:16 2021
 
  
