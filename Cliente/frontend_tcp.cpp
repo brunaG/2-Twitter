@@ -11,7 +11,7 @@ GerenciaConexaoFrontend::GerenciaConexaoFrontend(Notificacoes &obj):notification
     PORT = 8080;
     strcpy(addr, "127.0.0.");
 
-    //initialise sockets to -1 so not checked
+    // inicializa os sockets para -1, portanto não verificado
     client_socket = -1;
     server_socket = -1;
 
@@ -24,46 +24,46 @@ int GerenciaConexaoFrontend::estabeleceConexao(){
     struct sockaddr_in address;
     socklen_t addrlen = sizeof(struct sockaddr_in);
 
-    //create a master socket
+    //cria o socket master
     if( (master_socket = socket(AF_INET , SOCK_STREAM , 0)) == -1 )
     {
         perror("socket failed");
         sem_post(&mutex_socket);
         exit(EXIT_FAILURE);
     }
-    //needed to reutilize the socket after its closed
+    //necessario para reutilizar o socket apos o fechamento
     setsockopt(master_socket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 
-    //setting frontend address
+    // definindo endereço do frontend
     address.sin_family = AF_INET;
     address.sin_port = htons( PORT );
-    //address range from 127.0.0.10 to 127.0.0.50
+    //intervalo de endereços de 127.0.0.10 a 127.0.0.50
     address.sin_addr.s_addr = inet_addr("127.0.0.10");
     bzero(&(address.sin_zero), 8);
 
-    //bind the socket to localhost port 8080
+    // vincular o socket à porta localhost 8080
     int endaddr = 11;
     string newadress = "127.0.0.10";
     while ( (bind(master_socket, (struct sockaddr *)&address, sizeof(address)) < 0) && (endaddr <= 50) )
     {
-        //trying another address
+        // tentando outro endereço
         newadress = "127.0.0." + to_string(endaddr);
         address.sin_addr.s_addr = inet_addr(newadress.c_str());
         endaddr++;
     }
 
-    //assign obtained address
+    // atribuir endereço obtido
     strcpy(this->addr, newadress.c_str());
     printf("Listener on port %d, address %s\n", PORT, addr);
 
     sem_post(&mutex_socket);
 
     if (endaddr > 50) {
-        perror("bind failed");
+        perror("ligacao falhou");
         exit(EXIT_FAILURE);
     }
 
-    //try to specify maximum of 1 pending connection for the master socket
+    // tente especificar no máximo 1 conexão pendente para o socket mestre  
     if (listen(master_socket, 1) < 0)
     {
         perror("listen");
@@ -72,7 +72,7 @@ int GerenciaConexaoFrontend::estabeleceConexao(){
 
     //accept the incoming connection
     addrlen = sizeof(address);
-    puts("Waiting for connections ...");
+    puts("Aguardando conexões ...");
 
     //accepting new connection
     struct sockaddr_in client_address;
@@ -81,13 +81,13 @@ int GerenciaConexaoFrontend::estabeleceConexao(){
         if ((client_socket = accept(master_socket, (struct sockaddr *) &client_address,
                 &addrlen)) == -1)
         {
-            perror("accept");
+            perror("aceito");
             exit(EXIT_FAILURE);
         }
 
-        //creating threads to read from client and send to client
-        pthread_create(&th_read_client, NULL, &GerenciaConexaoFrontend::LeCliente, this);  //TODO
-        pthread_create(&th_read_server, NULL, &GerenciaConexaoFrontend::LeServidor, this);  //TODO
+        // criando threads para ler do cliente e enviar para o cliente
+        pthread_create(&th_read_client, NULL, &GerenciaConexaoFrontend::LeCliente, this); 
+        pthread_create(&th_read_server, NULL, &GerenciaConexaoFrontend::LeServidor, this);  
 
         pthread_join(th_read_client, NULL);
         pthread_join(th_read_server, NULL);
@@ -108,27 +108,27 @@ int GerenciaConexaoFrontend::ConectaServidor(){
     packet message;
     pthread_t th;
 
-    printf("Connecting to Servidor\n");
+    printf("Conectando ao Servidor\n");
 
     if ((server_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
-        cout << "\n Socket creation error \n";
+        cout << "\n erro ao criar o Socket  \n";
         return -1;
     }
 
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(PORT);
 
-    // Convert IPv4 and IPv6 addresses from text to binary form
+    // Converte os endereços IPv4 e IPv6 do formato de texto para o formato binário
     if(inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)<=0)
     {
-        cout << "\nInvalid address/ Address not supported \n";
+        cout << "\n Endereco invalido ou não suportado \n";
         return -1;
     }
 
     if (connect(server_socket, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
     {
-        cout << "\nConnection Failed**\n";
+        cout << "\n Conexao falhou **\n";
         return -1;
     }
 
@@ -136,7 +136,7 @@ int GerenciaConexaoFrontend::ConectaServidor(){
 
     while (true){
         if(ColetaEnviaMensagem(&message) < 0){
-            cout << "Error when sending the message" << endl;
+            cout << "Erro ao enviar mensagem" << endl;
         };
     }
 
@@ -159,22 +159,22 @@ void* GerenciaConexaoFrontend::LeCliente(void *arg){
 
     while(true){
         if (read( socket , &pkt, sizeof(pkt)) == 0){
-            cout << "Host disconnected" << endl;
+            cout << "Host desconectado" << endl;
             close( socket );
             pthread_exit(0);
         }
 
         if (connection.LeMensagem(pkt, connection.server_socket) < 0)
-            printf("Failed to send message to server\n");
+            printf("Falha ao enviar mensagem para o servidor\n");
     }
 }
 
 void GerenciaConexaoFrontend::imprimePacote (packet pkt){
-    printf("type: %d\n", pkt.type);
-    printf("seqn: %d\n", pkt.seqn);
-    printf("length: %d\n", pkt.length);
-    printf("timestamp: %d\n", pkt.timestamp);
-    printf("payload: ");
+  //  printf("type: %d\n", pkt.type);
+ //   printf("seqn: %d\n", pkt.seqn);
+  //  printf("length: %d\n", pkt.length);
+ //   printf("timestamp: %d\n", pkt.timestamp);
+ //   printf("payload: ");
     cout << pkt.payload << endl;
 
 }
@@ -193,10 +193,10 @@ void* GerenciaConexaoFrontend::LeServidor(void *ptr){
 
     while (true){
         if( read(connection.server_socket, &received_message, 1024) < 0){
-            printf("Failed to read from server\n");
+            printf("Falha ao ler do servidor\n");
         } else {
             if (connection.LeMensagem(received_message, connection.client_socket) < 0)
-            printf("FRONTEND: Failed to foward message\n");
+            printf("FRONTEND: Falha ao encaminhar mensagem\n");
         }
     }
 }

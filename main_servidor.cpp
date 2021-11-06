@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void *maintainConnection(void *arg) {
+void *manterconexao(void *arg) {
     ServerConnectionManagement obj = *(ServerConnectionManagement *) arg;
 
     if (obj.getType() == "primario")
@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
     pthread_t clientsThread;
 
     if (argc != 4) {
-        cout << "Missing arguments! To run use: './server <ID> <IP address> <server type: primario or replica>'"
+        cout << "Argumentos Invalidos! './server <ID> <ENDERECO IP> <primario or replica>'"
              << endl;
         exit(-1);
     }
@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
     string arg2 = argv[3];
     ServerConnectionManagement currentServer(atoi(argv[1]), arg1, arg2);
 
-    status = pthread_create(&clientsThread, NULL, maintainConnection, &currentServer);
+    status = pthread_create(&clientsThread, NULL, manterconexao, &currentServer);
     if (status != 0)
         exit(1);
 

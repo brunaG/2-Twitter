@@ -1,7 +1,6 @@
 #include "tcp_cliente.hpp"
 
 GerenciaConexaoCliente::GerenciaConexaoCliente(Notificacoes &obj):notification{obj}{
-    //TO DO: We can modify the constructor to receive the port
     PORT = 8080;
     sock = 0;
 }
@@ -14,7 +13,7 @@ int GerenciaConexaoCliente::EstabeleceConexao()
 
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
-        cout << "\n Socket creation error \n";
+        cout << "\n Erro ao criar o socket \n";
         return -1;
     }
 
@@ -24,13 +23,13 @@ int GerenciaConexaoCliente::EstabeleceConexao()
     // Convert IPv4 and IPv6 addresses from text to binary form
     if(inet_pton(AF_INET, this->connection_address, &serv_address.sin_addr)<=0)
     {
-        cout << "\nInvalid address/ Address not supported \n";
+        cout << "\nEndereço invalido ou nao suportado \n";
         return -1;
     }
 
     if (connect(sock, (struct sockaddr *)&serv_address, sizeof(serv_address)) < 0)
     {
-        cout << "\nConnection Failed**\n";
+        cout << "\nConexao Falhou**\n";
         return -1;
     }
 
@@ -38,7 +37,7 @@ int GerenciaConexaoCliente::EstabeleceConexao()
 
     while (true){
         if(ColetaEnviaMensagem(&message) < 0){
-            cout << "Error when sending the message" << endl;
+            cout << "Erro no envio da mensagem" << endl;
         };
     }
 

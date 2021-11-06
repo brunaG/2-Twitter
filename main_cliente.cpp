@@ -4,13 +4,13 @@
 #include "utilitarios/notificacao.hpp"
 using namespace std;
 
-void *CallInterface(void *arg){
+void *chamaInterface(void *arg){
     InterfaceCliente obj = * (InterfaceCliente *) arg;
     obj.CriaInterface();
     pthread_exit(NULL);
 }
 
-void *OpenConnection(void *arg){
+void *criaConexao(void *arg){
     GerenciaConexaoCliente obj = * (GerenciaConexaoCliente *) arg;
     obj.EstabeleceConexao();
     pthread_exit(NULL);
@@ -22,7 +22,7 @@ void *BootFrontend(void *arg){
     pthread_exit(NULL);
 }
 
-void *ConnectServer(void *arg){
+void *ConnectServidor(void *arg){
     GerenciaConexaoFrontend *obj = (GerenciaConexaoFrontend *) arg;
     obj->ConectaServidor();
     pthread_exit(NULL);
@@ -37,21 +37,21 @@ int main()
     GerenciaConexaoFrontend frontend (*notification_fe);
     pthread_t th1, th2, client_fe, server_fe;
 
-    //init unitary semaphore to wait while the frontend is booted
+    //init semáforo unitário, esperar o frontend ser inicializado
     sem_init(frontend.coletaSocketMutex(), 0, 0);
-    //booting frontend on a new thread
+    //inicializando frontend em uma nova thread
     pthread_create(&client_fe, NULL, BootFrontend, &frontend);
-    //wait for the frontend to bind its address
+    //espera o frontend vincular um endereco
     sem_wait(frontend.coletaSocketMutex());
-    //informing frontend's address to the client
+    //informando o endereço do frontend ao cliente
     connection.defineEnderecoConexao(frontend.coletaEndereco());
 
-    //thread to fe connect to server
-    pthread_create(&server_fe, NULL, ConnectServer, &frontend);
+    //thread para se conectar ao servidor
+    pthread_create(&server_fe, NULL, ConnectServidor, &frontend);
     
-    //creating client threads
-    pthread_create(&th2, NULL, OpenConnection, &connection);
-    pthread_create(&th1, NULL, CallInterface, &client);
+    //criando thread client
+    pthread_create(&th2, NULL, criaConexao, &connection);
+    pthread_create(&th1, NULL, chamaInterface, &client);
 
     pthread_join(th2, NULL);
     pthread_join(th1, NULL);

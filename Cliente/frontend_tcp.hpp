@@ -19,7 +19,7 @@
 using namespace std;
 
 class GerenciaConexaoFrontend{
-    char addr[11];    //frontend's address
+    char addr[11];    //endereco do frontend
     int PORT;
     int client_socket;
     int server_socket;
