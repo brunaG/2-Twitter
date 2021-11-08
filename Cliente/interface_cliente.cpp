@@ -29,7 +29,7 @@ void InterfaceCliente::CriaInterface(){
     DefinePerfil(user_profile);
     ProcessaComandos(ColetaPerfil(), TYPE_USER);
 
-    cout << "██████████ SEJA BEM VINDO " << recebePerfil() << " ██████████" << endl;
+    cout << "██████████ SEJA BEM VINDO " << ColetaPerfil()<< " ██████████" << endl;
     cout << "Use o comando SEND + sua mensagem para postar uma nova mensagem!" << endl;
     cout << "Use o comando FOLLOW @ + nome de usuario que voce deseja seguir" << endl;
     cout << "nao esqueca do @" << endl;
