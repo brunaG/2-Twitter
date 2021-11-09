@@ -386,8 +386,8 @@ void ServerConnectionManagement::imprimePacote (packet pkt){
    // printf("type: %d\n", pkt.type);
     //printf("seqn: %d\n", pkt.seqn);
     //printf("length: %d\n", pkt.length);
-    //printf("timestamp: %d\n", pkt.timestamp);
-    //printf("payload: ");
+  //  printf("timestamp: %d\n", pkt.timestamp);
+   // printf("payload: ");
     cout << pkt.payload << endl;
 }
 
