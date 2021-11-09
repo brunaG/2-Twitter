@@ -276,7 +276,7 @@ void* ServerConnectionManagement::SendMessage(void *arg){
         else{
             int erro = ((Usuario*) th_struct.users_obj) -> ColetaMensagem(socket, &notification);
             if (erro == -1){
-                cout << "getMessage nao funcionou!" << endl;
+                cout << "No message!"<< endl;
             }
             else{
                 if(send(socket, &notification, sizeof(notification), MSG_NOSIGNAL) != sizeof(notification) ){
@@ -302,27 +302,8 @@ void* ServerConnectionManagement::ReadMessage(void *arg){
             pthread_exit(0);
         }
 
-        imprimePacote(pkt);
+printPacket(pkt);
 
-        /*
-        for (int i = 0; i < (int) replicas_list->size(); i++){
-            cout << "Replica socket: " << (*replicas_list)[i].getSocket() << endl;
-            packet_replica pkt_rep;
-            pkt_rep.length = pkt.length;
-            //pkt_rep.payload = pkt.payload;
-            strncpy(pkt_rep.payload, pkt.payload, sizeof(pkt_rep.payload));
-            pkt_rep.seqn = pkt.seqn;
-            pkt_rep.type = pkt.type;
-            pkt_rep.timestamp = pkt.timestamp;
-            pkt_rep.socket = socket;
-            if(send((*replicas_list)[i].getSocket(), &pkt_rep, sizeof(pkt_rep), 0) != sizeof(pkt_rep) ){
-                perror("send");
-            }
-        }
-
-        ((Users*) th_struct.users_obj) -> NewMessageFromClient(pkt, socket);
-        */
-        
         confirm_args args;
         args.pkt = pkt;
         args.replicas = replicas_list;
@@ -342,10 +323,12 @@ void* ServerConnectionManagement::ConfirmTransaction(void *arg){
     packet pkt = arg_struct.pkt;
     int socket = arg_struct.socket;
 
-    for (int i = 0; i < (int) replicas_list->size(); i++){
+    int i = 0;
+    while ((*replicas_list)[i].coletaSocket() > -1){
+   // for (int i = 0; i < (int) replicas_list->size(); i++){
         //cout << "Replica socket: " << (*replicas_list)[i].getSocket() << endl;
-        if ( (*replicas_list)[i].coletaSocket() < 0)
-            continue;
+    //    if ( (*replicas_list)[i].coletaSocket() < 0)
+      //      continue;
         
         //building packet to replica
         EDPacoteReplica pkt_rep;
@@ -358,22 +341,24 @@ void* ServerConnectionManagement::ConfirmTransaction(void *arg){
 
         //sending the packet
         if( send((*replicas_list)[i].coletaSocket(), &pkt_rep, sizeof(pkt_rep), MSG_NOSIGNAL) != sizeof(pkt_rep) ) {
-            perror("send");
+            //perror("send");
             cout << "Replica " << (*replicas_list)[i].coletaID() << " disconnected! Ignoring it..." << endl;
             close ( (*replicas_list)[i].coletaSocket() );
             (*replicas_list)[i].defineSocket(-1);
         }
         //if packet was send with success, wait for acknowledgement
         else {
-            bzero(&pkt, sizeof(pkt));
-            if (read( socket , &pkt, sizeof(pkt)) <= 0) {
+           // bzero(&pkt, sizeof(pkt));
+           packet response;
+            //if (read( replicas_list , &pkt, sizeof(pkt)) <= 0) {
+            if (read( (*replicas_list)[i].getSocket() , &response, sizeof(response)) <= 0) {
                 perror("read");
                 cout << "Replica " << (*replicas_list)[i].coletaID() << " could not answer! Disconnecting it..." << endl;
                 close ( (*replicas_list)[i].coletaSocket() );
                 (*replicas_list)[i].defineSocket(-1);
                 continue;
             }
-            printf("\nReplica %d ... ACK!\n", (*replicas_list)[i].coletaID());
+            printf("\nReplica %d : recebeu com sucesso a informacao!\n", (*replicas_list)[i].coletaID());
         }
     }
 
@@ -530,7 +515,7 @@ void* ServerConnectionManagement::listenToGroup(void *arg){
         }
         struct timeval tv;
         tv.tv_sec = 2;
-        tv.tv_usec = 0;
+        tv.tv_usec = 2000000;
         setsockopt(replica_socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
 
         //update replica's socket
@@ -604,11 +589,11 @@ int ServerConnectionManagement::runAsReplica(){
     p_index = connectToGroup();
     if (p_index >= 0){
         primary = replicas[p_index];
-        printf("Servidor id %d é o novo lider\n", primary.coletaID());
+        printf("Servidor id %d é o lider\n", primary.coletaID());
         lider = primary.coletaID();
     }
     else{
-        printf("No primary server found\n");
+        printf("Servidor Primario Nao Encontrado\n");
         // START ELECTION
     }
 
@@ -635,7 +620,17 @@ int ServerConnectionManagement::runAsReplica(){
         if (status == 0) {
             cout << "Servidor Primario Desconectado!" << endl;
             startElection();
-            cout << "*****LIDER: " << lider << endl;
+           // cout << "*****LIDER: " << lider << endl;
+         
+           for (int i = 0; i < max_clients; i++)
+            {
+                if( client_ip[i].size() != 0 )
+                {
+                    string ip = client_ip[i];
+                    cout << "IP cliente " << ip << endl;
+                    connectFrontEnd(ip);
+                }
+            }
 
         }
         else if (status > 0) {
@@ -651,21 +646,83 @@ int ServerConnectionManagement::runAsReplica(){
 
             //proccess message
             users.novaMensagemCliente(pkt, sck);
+            if (pkt_rep.type == 6){
+                int i;
+
+                for (i = 0; i < max_clients; i++)
+                {
+                    //if position is empty
+                    if( client_ip[i].size() <= 0 )
+                    {
+                        client_ip[i] = pkt_rep.payload;
+                        printf("Adicionando na lista de ips:  %d\n" , i);
+                        break;
+                    }
+                }
+            }
 
             //send acknowledgement
             packet response;
             response.type = 5;
             response.seqn = 0;
+            response.length = sizeof("ACK");
             response.timestamp = time(0);
-            if( send(primary_socket, &response, sizeof(response), MSG_NOSIGNAL) != sizeof(response) ){
-                perror("send");
-                cout << "Failed to send acknowledgement packet **" << endl;
-                return -1;
+            strcpy(response.payload, "ACK");
+            if( send(primary_socket, &response, sizeof(response), 0) != sizeof(response) ){
+                cout << "falha ao enviar para o servidor" << endl;
+               close(primary_socket);
+                exit(EXIT_FAILURE);
+              } else {
+                cout << "recebeu com sucesso a informacao no socket \n" << primary_socket << endl;                
+            }
             }
         }
 
     }
     return 0;
+}
+void ServerConnectionManagement::connectFrontEnd(string ip_addrs){
+    struct sockaddr_in serv_address;
+    packet message;
+    int sock = 0;
+    string lider_ip;
+
+    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+    {
+        cout << "\n Socket creation error \n";
+    }
+
+    serv_address.sin_family = AF_INET;
+    serv_address.sin_port = htons(PORT);
+
+    // Convert IPv4 and IPv6 addresses from text to binary form
+    if(inet_pton(AF_INET, ip_addrs.c_str(), &serv_address.sin_addr)<=0)
+    {
+        cout << "\nInvalid address/ Address not supported \n";
+    }
+
+    if (connect(sock, (struct sockaddr *)&serv_address, sizeof(serv_address)) < 0)
+    {
+        cout << "\nConnection Failed**\n";
+    }
+
+    for (int i; i < (int) replicas.size(); i++){
+        if (lider == replicas[i].getID()){
+            lider_ip = replicas[i].getAddress();
+            break;
+        }
+    }
+    message.type = 4;
+    message.seqn = 0;
+    message.length = sizeof(lider_ip.c_str());
+    message.timestamp = time(0);
+    strcpy(message.payload, lider_ip.c_str());
+    if (send(sock , &message, sizeof(message), 0) < 1){
+        cout << "Error sending message to frontend!" << endl;
+    }
+
+    close(sock);
+
 }
 
 void ServerConnectionManagement::startElection(){
@@ -696,8 +753,8 @@ void ServerConnectionManagement::startElection(){
                 idpacket.seqn = 0;
                 idpacket.length = sizeof(to_string(ID_server).c_str());
                 strcpy(idpacket.payload, to_string(ID_server).c_str());
-                cout << "Sending election to: " << replicas[i].coletaSocket() << endl;
-                cout << "Sending election to ID: " << replicas[i].coletaID() << endl;
+            //    cout << "Sending election to: " << replicas[i].coletaSocket() << endl;
+              //  cout << "Sending election to ID: " << replicas[i].coletaID() << endl;
                 int status = send(replicas[i].coletaSocket(), &idpacket, sizeof(idpacket), MSG_NOSIGNAL);
                 if( status < 0 ){
                     perror("send");
@@ -759,7 +816,7 @@ void ServerConnectionManagement::startElection(){
             }
             else
             {
-                sleep(2);
+             //   sleep(2);
                 for(int i=0; i< (int) replicas.size();i++){
                     election_args elect_th;
                     elect_th.resp = &resposta;
@@ -776,7 +833,7 @@ void ServerConnectionManagement::startElection(){
 
     lider = lider_atual;
 
-    cout << "___Eleicao finalizada. Novo lider: " << lider << "___\n";
+    cout << "Eleicao finalizada. Novo lider: " << lider << "___\n";
 
 }
 
@@ -789,7 +846,7 @@ void* ServerConnectionManagement::readElection(void* arg){
     signal(SIGALRM, alarm_handler);
     alarm(2);
     if (read( elect_th.socket_ , &idpacket, sizeof(idpacket)) <= 0) {
-        cout << "Erro!" << endl;
+       cout << "Not possible to read from socket " << elect_th.socket_ << endl;
     }
     else{
         *resposta = true;
@@ -800,7 +857,6 @@ void* ServerConnectionManagement::readElection(void* arg){
 
 void ServerConnectionManagement::alarm_handler(int value){
     cout << "TIMEOUT" << endl;
-
 }
 
 void* ServerConnectionManagement::waitLider(void* arg){
@@ -813,7 +869,7 @@ void* ServerConnectionManagement::waitLider(void* arg){
     alarm(2);
 
     if (read( elect_th.socket_ , &idpacket, sizeof(idpacket)) <= 0) {
-        cout << "Erro!" << endl;
+         cout << "Not possible to read from socket " << elect_th.socket_ << endl;
     }
     else{
         *resposta = true;
@@ -831,7 +887,20 @@ int ServerConnectionManagement::addNewIP(string ip){
         if( client_ip[i].size() <= 0 )
         {
             client_ip[i] = ip;
-           // printf("Adding to list of ips as %d\n" , i);
+            printf("Adding to list of ips as %d\n" , i);
+            for(int i=0; i< (int) replicas.size();i++){
+                //TO DO: CRIAR O PKT PARA ENVIAR
+                packet idpacket;
+                idpacket.type = 6;
+                idpacket.seqn = 0;
+                idpacket.length = sizeof(ip.c_str());
+                strcpy(idpacket.payload, ip.c_str());
+                if( send(replicas[i].getSocket(), &idpacket, sizeof(idpacket), MSG_NOSIGNAL) != sizeof(idpacket) ){
+                    perror("send");
+                    cout << "Failed to send packet to election**" << endl;
+                }
+
+            }
             break;
         }
     }

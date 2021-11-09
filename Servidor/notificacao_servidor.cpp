@@ -32,7 +32,7 @@ int GerenciaNotificacao::NovoSeguidor(string perfil, string seguidor){
         retorno = adicionaLinhaArquivo(caminho + perfil + formato, seguidor);
 
         if(retorno != 0){
-            cout << "---------- ERRO AO ESCREVER NO ARQUIVO ----------";
+            cout << "Erro ao escrever no arquivo-";
             return -1;
         }
 
@@ -276,7 +276,7 @@ int GerenciaNotificacao::ProcuraSeguidor(string caminho, string perfil_procurado
     ifstream inFile(caminho, ios::in);
 
     if(!inFile){
-        cout << "---------- ERRO AO ABRIR ARQUIVO PARA LEITURA ----------\n";
+        cout << "Erro ao abrir arquivo para leitura \n";
         return -1;
     }
     else{
@@ -337,7 +337,7 @@ int GerenciaNotificacao::AdicionaFilaPendentes(int indice_not, int id_tweet){
         num_seguidores++;
 
         if(num_seguidores == PERFIS){
-            cout << "---------- PERFIL NÃO CADASTRADO ----------\n";
+            cout << "erro:  Perfil nao cadastrado\n";
             return -1;
         }
     }
@@ -353,7 +353,7 @@ int GerenciaNotificacao::AdicionaFilaPendentes(int indice_not, int id_tweet){
         while(notification[indice_not].fila_notificacoes[indice_fila].perfil != "NULL"){
             indice_fila++;
             if(indice_fila == 300){
-                cout << "---------- ERRO NA FILA DE NOTIFICAÇÕES ----------\n";
+                cout << "erro na fila de notificacoes \n";
                 return -1;
             }
 
@@ -384,7 +384,7 @@ int GerenciaNotificacao::AdicionaTweet(struct EDPacote* tweet){
         i++;
 
         if(i == PERFIS){
-            cout << "---------- PERFIL NÃO CADASTRADO ----------\n";
+            cout << "erro:  Perfil nao cadastrado\n";
             return -1;
         }
 
