@@ -82,9 +82,9 @@ int ServerConnectionManagement::establishConnection(){
     char ip[IP_addr.size()+1];
     strcpy(ip, IP_addr.c_str());
 
-    cout << "My IP addrs: " << ip << endl;
-    cout << "My ID: " << ID_server << endl;
-    cout << "Servidor type: " << type_server << endl;
+    cout << "IP addrs: " << ip << endl;
+    cout << "ID: " << ID_server << endl;
+    cout << "Tipo de Servidor: " << type_server << endl;
 
     for (int i=0; i< (int) replicas.size(); i++){
         cout << "Replica: " << replicas[i].pegaEndereco() << endl;
@@ -158,12 +158,12 @@ int ServerConnectionManagement::establishConnection(){
             if ((new_socket = accept(master_socket,
                     (struct sockaddr *)&address, (socklen_t*)&addrlen))<0)
             {
-                perror("accept");
+                perror("ACEITO");
                 exit(EXIT_FAILURE);
             }
 
             //inform user of socket number - used in send and receive commands
-            printf("New connection , socket fd is %d , ip is : %s , port : %d\n" , new_socket , inet_ntoa(address.sin_addr) , ntohs(address.sin_port));
+            printf("Nova conexao, socket fd  %d , ip  : %s , porta : %d\n" , new_socket , inet_ntoa(address.sin_addr) , ntohs(address.sin_port));
 
             int index = addNewSocket(new_socket);
             addNewIP( addressToStr(address) );
@@ -295,7 +295,7 @@ void* ServerConnectionManagement::ReadMessage(void *arg){
 
     while(true){
         if (read( socket , &pkt, sizeof(pkt)) == 0){
-            cout << "Host disconnected" << endl;
+            cout << "Host desconectado" << endl;
             close( socket );
             ((ServerConnectionManagement *) th_struct.obj)->deleteSocket(socket);
             // TO DO: Call user LogOut method
@@ -383,11 +383,11 @@ void* ServerConnectionManagement::ConfirmTransaction(void *arg){
 }
 
 void ServerConnectionManagement::imprimePacote (packet pkt){
-    printf("type: %d\n", pkt.type);
-    printf("seqn: %d\n", pkt.seqn);
-    printf("length: %d\n", pkt.length);
-    printf("timestamp: %d\n", pkt.timestamp);
-    printf("payload: ");
+   // printf("type: %d\n", pkt.type);
+    //printf("seqn: %d\n", pkt.seqn);
+    //printf("length: %d\n", pkt.length);
+    //printf("timestamp: %d\n", pkt.timestamp);
+    //printf("payload: ");
     cout << pkt.payload << endl;
 }
 
@@ -525,7 +525,7 @@ void* ServerConnectionManagement::listenToGroup(void *arg){
         if ((replica_socket = accept(master_socket, (struct sockaddr *) &replica_address,
                 &addrlen)) < 0)
         {
-            perror("accept new replica");
+            perror(" nova replica aceita");
             continue;
         }
         struct timeval tv;
@@ -546,7 +546,7 @@ void* ServerConnectionManagement::listenToGroup(void *arg){
                 if(greeting_result >= 0)
                 {
                     (*replicas)[i].defineSocket(replica_socket);
-                    printf("Replica at %s connected\n", ip_address.c_str());
+                    printf("Replica  %s conectada \n", ip_address.c_str());
                 }
                 break;
             }
@@ -604,7 +604,7 @@ int ServerConnectionManagement::runAsReplica(){
     p_index = connectToGroup();
     if (p_index >= 0){
         primary = replicas[p_index];
-        printf("Servidor id %d is the leader\n", primary.coletaID());
+        printf("Servidor id %d é o novo lider\n", primary.coletaID());
         lider = primary.coletaID();
     }
     else{
@@ -633,7 +633,7 @@ int ServerConnectionManagement::runAsReplica(){
 
         status = read( primary_socket , &pkt_rep, sizeof(pkt_rep));
         if (status == 0) {
-            cout << "Primary disconected!" << endl;
+            cout << "Servidor Primario Desconectado!" << endl;
             startElection();
             cout << "*****LIDER: " << lider << endl;
 

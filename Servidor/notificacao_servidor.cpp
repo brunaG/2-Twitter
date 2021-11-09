@@ -32,7 +32,7 @@ int GerenciaNotificacao::NovoSeguidor(string perfil, string seguidor){
         retorno = adicionaLinhaArquivo(caminho + perfil + formato, seguidor);
 
         if(retorno != 0){
-            cout << "---------- ERRO ESCRITA NO ARQUIVO ----------";
+            cout << "---------- ERRO AO ESCREVER NO ARQUIVO ----------";
             return -1;
         }
 
@@ -272,7 +272,7 @@ int GerenciaNotificacao::ProcuraSeguidor(string caminho, string perfil_procurado
     ifstream inFile(caminho, ios::in);
 
     if(!inFile){
-        cout << "---------- ERRO ABERTURA ARQUIVO PARA LEITURA ----------\n";
+        cout << "---------- ERRO AO ABRIR ARQUIVO PARA LEITURA ----------\n";
         return -1;
     }
     else{
@@ -440,7 +440,7 @@ int GerenciaNotificacao::NovoPerfilNotificacao(string perfil){
 
     ifstream inFile(caminho + perfil + formato);
     if(!inFile){
-        cout << "---------- ERRO ABERTURA ARQUIVO PARA LEITURA ----------\n";
+        cout << "---------- ERRO AO ABRIR ARQUIVO PARA LEITURA ----------\n";
         return -1;
     }
     else{
