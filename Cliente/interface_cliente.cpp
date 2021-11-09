@@ -11,11 +11,11 @@ void InterfaceCliente::CriaInterface(){
 
     cout << "███████████████████████████████████████" << endl;
     cout << "               TWITTER "                 << endl;
-    cout << "███████████████████████████████████████" << "\n\n\n\n" << endl;
+    cout << "███████████████████████████████████████" << "\n" << endl;
     cout << "Digite seu nome de usuario" << endl;
     cout << "Username: ";
     getline(cin, user_profile);
-    cout << "\n\n\n\n" << endl;
+    cout << "\n" << endl;
 
     while (perfilInvalido(user_profile)){
         cout << "Seu nome de usuario deve ter entre 4 e 20 caracteres" << endl;
@@ -31,8 +31,8 @@ void InterfaceCliente::CriaInterface(){
 
     cout << "██████████ SEJA BEM VINDO " << ColetaPerfil()<< " ██████████" << endl;
     cout << "Use o comando SEND + sua mensagem para postar uma nova mensagem!" << endl;
-    cout << "Use o comando FOLLOW @ + nome de usuario que voce deseja seguir" << endl;
-    cout << "nao esqueca do @" << endl;
+    cout << "Use o comando FOLLOW @ + nome de usuario que voce deseja seguir e nao esqueca do @" << endl;
+    // cout << "nao esqueca do @" << endl;
 
     pthread_create(&th, NULL, &InterfaceCliente::ColetaNovaNotificacao, this);
 
@@ -86,10 +86,11 @@ void* InterfaceCliente::ColetaNovaNotificacao(void *ptr){
     while (true){
         ((InterfaceCliente*) ptr) -> notification.ColetaNotificacoesReceber(&new_notification);
         cout << "█████████████████████████████████" << endl;
-        cout << "    NOVA NOTIFICACAO RECEBIDA    " << endl;
+        cout << "    NOVA MENSAGEM                  " << endl;
         cout << "█████████████████████████████████" << endl;
-       // printf("timestamp: %d\n", new_notification.timestamp);
-        cout << "Message: " << new_notification.payload << endl;
+        cout << "\n" << endl;
+        //printf("timestamp: %d\n", new_notification.timestamp);
+        cout << new_notification.payload << endl;
         cout << "\n" << endl;
     }
 }

@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Nov  6 16:53:16 2021
+# Make data base, printed on Tue Nov  9 01:41:11 2021
 
 # Variables
 
@@ -53,7 +53,7 @@ VSCODE_NLS_CONFIG = {"locale":"pt-br","availableLanguages":{"*":"pt-br"},"_langu
 # environment
 _ = /usr/share/code/code
 # environment
-JOURNAL_STREAM = 8:28692
+JOURNAL_STREAM = 8:29739
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'Makefile', line 1)
@@ -73,7 +73,7 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-MANAGERPID = 919
+MANAGERPID = 960
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -89,7 +89,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-SESSION_MANAGER = local/bruna-VirtualBox:@/tmp/.ICE-unix/1191,unix/bruna-VirtualBox:/tmp/.ICE-unix/1191
+SESSION_MANAGER = local/bruna-VirtualBox:@/tmp/.ICE-unix/1231,unix/bruna-VirtualBox:/tmp/.ICE-unix/1231
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -99,7 +99,7 @@ VSCODE_LOG_STACK = false
 # environment
 VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=0f33bc2f-5234-4da7-b25f-4216ffbafdfd&iid=0f33bc2f-5234-4da7-b25f-4216ffbafdfd&sid=0f33bc2f-5234-4da7-b25f-4216ffbafdfd","uploadToServer":true}
 # environment
-INVOCATION_ID = 9c60d18ddbc74915b7cd8eb2b6a6b495
+INVOCATION_ID = a9475e4f4d0747d59917b03d8caf2c9c
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -109,7 +109,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 1560
+GIO_LAUNCHED_DESKTOP_FILE_PID = 1648
 # automatic
 %F = $(notdir $%)
 # environment
@@ -121,7 +121,7 @@ PWD = /home/bruna/Área de Trabalho/2-Twitter
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1143
+SSH_AGENT_PID = 1183
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -161,7 +161,7 @@ CLIENT := main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/tcp_cliente.cpp Clie
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-149e34b3-0003-4ff6-adfc-ed53665a4a52.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-c2bc5608-298e-471a-91a4-74ece8a18b1d.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -237,7 +237,7 @@ LC_ADDRESS = es_UY.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1560
+VSCODE_PID = 1648
 # variable set hash-table stats:
 # Load=114/1024=11%, Rehash=0, Collisions=19/150=13%
 
@@ -247,13 +247,13 @@ VSCODE_PID = 1560
 
 # Directories
 
-# . (device 2053, inode 817109): 14 files, no impossibilities.
+# . (device 2053, inode 817109): 15 files, no impossibilities.
 # Servidor (device 2053, inode 817455): 10 files, no impossibilities.
 # utilitarios (device 2053, inode 817467): 13 files, no impossibilities.
 # Server: could not be stat'd.
 # Cliente (device 2053, inode 817447): 8 files, no impossibilities.
 
-# 45 files, no impossibilities in 5 directories.
+# 46 files, no impossibilities in 5 directories.
 
 # Implicit Rules
 
@@ -278,7 +278,7 @@ Servidor/notificacao_servidor.cpp:
 Cliente/interface_cliente.cpp:
 #  Implicit rule search has been done.
  
-#  Last modified 2021-11-05 17:11:59.05686567
+#  Last modified 2021-11-09 01:29:46.076027689
 #  File has been updated.
 #  Successfully updated.
 
@@ -321,7 +321,7 @@ client: main_cliente.cpp Cliente/frontend_tcp.cpp Cliente/tcp_cliente.cpp Client
 # Not a target:
 Cliente/frontend_tcp.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-05 17:11:59.05686567
+#  Last modified 2021-11-09 00:49:57.166165074
 #  File has been updated.
 #  Successfully updated.
 
@@ -348,14 +348,14 @@ server: main_servidor.cpp Servidor/notificacao_servidor.cpp Servidor/tcp_servido
 # Not a target:
 main_servidor.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-05 15:36:30.170535266
+#  Last modified 2021-11-09 00:12:25.711914566
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 Cliente/tcp_cliente.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-05 18:28:58.629503933
+#  Last modified 2021-11-09 00:12:25.70791388
 #  File has been updated.
 #  Successfully updated.
 
@@ -400,7 +400,7 @@ Servidor/replica.cpp:
 # Not a target:
 main_cliente.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-05 17:11:59.060865758
+#  Last modified 2021-11-09 00:12:25.711914566
 #  File has been updated.
 #  Successfully updated.
 
@@ -419,12 +419,12 @@ utilitarios/notificacao.cpp:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 55 / storage = 854 B / avg = 15 B
-# current buf: size = 8162 B / used = 854 B / count = 55 / avg = 15 B
+# strcache buffers: 1 (0) / strings = 56 / storage = 860 B / avg = 15 B
+# current buf: size = 8162 B / used = 860 B / count = 56 / avg = 15 B
 
-# strcache performance: lookups = 94 / hit rate = 41%
+# strcache performance: lookups = 95 / hit rate = 41%
 # hash-table stats:
-# Load=55/8192=1%, Rehash=0, Collisions=4/94=4%
-# Finished Make data base on Sat Nov  6 16:53:16 2021
+# Load=56/8192=1%, Rehash=0, Collisions=4/95=4%
+# Finished Make data base on Tue Nov  9 01:41:11 2021
 
  

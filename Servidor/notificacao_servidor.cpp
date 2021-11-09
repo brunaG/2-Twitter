@@ -168,28 +168,32 @@ int GerenciaNotificacao::EnviaTweet(packet* tweet, string perfil){
     // No final do laço acima, temos:
     // not_final = índice notification do tweet a ser enviado
     // tweet_final = índice do tweet no notification[not_final] a ser enviado
-    cout << "****TWEETS****: " << TWEETS << endl;
-    cout << "****not_final****: " << not_final << endl;
+   // cout << "****TWEETS****: " << TWEETS << endl;
+   // cout << "****not_final****: " << not_final << endl;
 
     if(not_final == TWEETS){
         return -1;
     }
     else{
 
-        cout << "\n\n-- VERIFICAÇÃO --\n";
-        cout << "\n\nÍndice not do tweet mais antigo de @perfil:\n";
+        cout << "\n-F5 - troca de mensagem identificada -\n";
+       // cout << "\n\nÍndice not do tweet mais antigo de @perfil:\n";
         cout << not_final;
-        cout << "\nÍndice tweet mais antigo de @perfil:\n";
+       // cout << "\nÍndice tweet mais antigo de @perfil:\n";
         cout << tweet_final;
 
 
         // Concatena para na msg quem escreveu o tweet
         string nova_msg;
 
+        printf(" \n");
+        nova_msg = "nova mensagem do usuario  ";
         nova_msg = notification[not_final].tweet[tweet_final].owner;
-        nova_msg += ": ";
+        nova_msg += ": enviou a mensagem:   ";
+       // cout << "\n enviou a mensagem ";
         nova_msg += notification[not_final].tweet[tweet_final].payload;
-
+        printf("\n\n\n");
+       
         tweet->type = notification[not_final].tweet[tweet_final].type;
         tweet->seqn = notification[not_final].tweet[tweet_final].seqn;
         tweet->length = notification[not_final].tweet[tweet_final].length;
@@ -417,7 +421,7 @@ int GerenciaNotificacao::AdicionaTweet(struct EDPacote* tweet){
         notification[i].tweet[n].owner = tweet->owner;
 
     }
-    cout << "Notificacao: " << notification[i].tweet[n].payload << endl;
+    //cout << "Notificacao: " << notification[i].tweet[n].payload << endl;
     AdicionaFilaPendentes(i, notification[i].tweet[n].seqn);
     return 0;
 

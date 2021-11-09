@@ -54,7 +54,7 @@ int GerenciaConexaoFrontend::estabeleceConexao(){
 
     // atribuir endereço obtido
     strcpy(this->addr, newadress.c_str());
-    printf("Listener on port %d, address %s\n", PORT, addr);
+   // printf("Listener on port %d, address %s\n", PORT, addr);
 
     sem_post(&mutex_socket);
 
@@ -108,7 +108,7 @@ int GerenciaConexaoFrontend::ConectaServidor(){
     packet message;
     pthread_t th;
 
-    printf("Conectando ao Servidor\n");
+   // printf("Conectando ao Servidor\n");
 
     if ((server_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {

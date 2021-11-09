@@ -82,7 +82,7 @@ int ServerConnectionManagement::establishConnection(){
     char ip[IP_addr.size()+1];
     strcpy(ip, IP_addr.c_str());
 
-    cout << "IP addrs: " << ip << endl;
+    cout << "Endereco IP : " << ip << endl;
     cout << "ID: " << ID_server << endl;
     cout << "Tipo de Servidor: " << type_server << endl;
 
@@ -101,7 +101,7 @@ int ServerConnectionManagement::establishConnection(){
         perror("bind failed");
         exit(EXIT_FAILURE);
     }
-    printf("Listener on port %d \n", PORT);
+    //printf("Listener on port %d \n", PORT);
 
     //try to specify maximum of 3 pending connections for the master socket
     if (listen(master_socket, 3) < 0)
@@ -209,7 +209,7 @@ int ServerConnectionManagement::addNewSocket(int socket){
         if( client_socket[i] == 0 )
         {
             client_socket[i] = socket;
-            printf("Adding to list of sockets as %d\n" , i);
+            //printf("Adding to list of sockets as %d\n" , i);
 
             break;
         }
@@ -507,7 +507,7 @@ void* ServerConnectionManagement::listenToGroup(void *arg){
         perror("bind failed");
         exit(EXIT_FAILURE);
     }
-    printf("Group listener on port %d \n", 30000);
+   //  printf("Group listener on port %d \n", 30000);
 
     //try to specify maximum of 3 pending connections for the master socket
     if (listen(master_socket, 3) < 0)
@@ -831,7 +831,7 @@ int ServerConnectionManagement::addNewIP(string ip){
         if( client_ip[i].size() <= 0 )
         {
             client_ip[i] = ip;
-            printf("Adding to list of ips as %d\n" , i);
+           // printf("Adding to list of ips as %d\n" , i);
             break;
         }
     }
